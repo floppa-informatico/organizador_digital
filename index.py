@@ -1,7 +1,7 @@
 def information_input():
     """
     Esta función le mostrará al usuario, y un menú para lo que el
-    usuario estime conveniente,
+    usuario estime conveniente.
     """
     option = int(input("Bienvenid@ a Organizador digital, nos adaptamos"
                     " rápidamente a ti :D!\n"
@@ -18,15 +18,31 @@ def information_input():
     return option
 
 
-def questions():
-    answers = [0,0,0,0,0,0,0,0,0,0,0,0]
-    day = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] 
+def time_answers():
+    """
+    Esta función se encarga de dejar todas las respuestas en una sola
+    lista para así poder trabajarlas durante el largo del código.
+    """
+    answers = []
+    day = []
     answers_1 = input("Para comenzar, ingrese su horario de clases del día"
                     " Lunes separado por ; (Ej: 9:00-10:00;10:00-11:00;etc.)"
                     ": ")
+    list_temp = answers_1.split(";")
+    print(list_temp)
+    for i in range (len(list_temp)):
+        temp = list_temp[i]
+        temp = temp.split("-")
+        temp_1 = temp[0]
+        day.append(temp_1)
+        temp_2 = temp[1]
+        day.append(temp_2)
+    answers.append(day)
+    return answers
+
+def questions():
     return
 
-questions()
 
 def main():
     return
