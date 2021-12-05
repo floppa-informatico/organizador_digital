@@ -96,4 +96,3 @@ def main():
         option = information_input()
         if option == 1:
             u = option_1(option)
-
