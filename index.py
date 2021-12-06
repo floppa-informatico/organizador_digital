@@ -62,8 +62,9 @@ def questions():
 def weekly_time(answer,i):
     """
     Esta función se encarga de dejar todas las respuestas relacionadas
-    al tiempo en una sola lista para así poder trabajarlas durante el 
-    largo del código. El tiempo d
+    al tiempo semanal en una sola lista para así poder trabajarlas 
+    durante el largo del código. El tiempo es separado en horas y
+    minutos, además que queda separado por día.
     """
     answers = []
     day = []
@@ -87,6 +88,11 @@ def weekly_time(answer,i):
 
 
 def daily_time(answer,f):
+    """
+    Esta función se encarga de separar las horas de los minutos de los
+    tiempos especificados como actividades diarias. Para de esta manera
+    poder trabajar con estos datos durante el programa.
+    """
     answer_1 = answer[f]
     answer_1 = answer_1.split(":")
     for j in range(2):
@@ -95,6 +101,12 @@ def daily_time(answer,f):
 
 
 def option_1():
+    """
+    Esta función es la función para la primera opción que se encarga de
+    hacerle las preguntas correspondientes al usuario, para luego
+    de manera interna pueda hacer el horario para el usuario totalmente
+    adapto a él. El usuario podra ver el horario en la opción 2.
+    """
     answer = questions()
     days = []
     day = []
