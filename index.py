@@ -53,6 +53,9 @@ def questions():
     question_9 = input("¿Cuantas horas le dedicas a tu tiempo con tu" 
                         "familia?: ")
     question_10 = input("¿Como te has sentido? (Escriba bien o mal): ")
+    # Agrega todas las respuestas de las preguntas a una lista para
+    # usar lo menos posibles tantas variables que retornen a la
+    # función principal.
     all_questions.extend([question_0,question_1,question_2,question_3,
                         question_4,question_5,question_6,question_7,
                         question_8,question_9,question_10])
@@ -70,6 +73,8 @@ def weekly_time(answer,i):
     day = []
     answers_1 = answer[i]
     answers_1 = answers_1.split(";")
+    # Se usa un iterador for para separar terminos según su posición
+    # dentro de la lista.
     for j in range(len(answers_1)):
         temp = answers_1[j]
         temp = temp.split("-")
@@ -83,6 +88,7 @@ def weekly_time(answer,i):
         temp_2_1[0] = int(temp_2_1[0])
         temp_2_1[1] = int(temp_2_1[1])
         day.append(temp_2_1)
+    # Agrega los horarios de un solo día al listado de horarios por día
     answers.append(day)
     return answers
 
@@ -100,6 +106,16 @@ def daily_time(answer,f):
     return answer_1
 
 
+def s_days(answer):
+    """
+    Esta función se ocupa de separar los días de la pregunta 5 para así
+    poder trabajarlos de mejorar manera durante el programa.
+    """
+    answer_1 = answer[6]
+    answer_1 = answer_1.split(";")
+    return answer_1
+
+
 def option_1():
     """
     Esta función es la función para la primera opción que se encarga de
@@ -110,18 +126,23 @@ def option_1():
     answer = questions()
     days = []
     day = []
+    # Separa las horas de los minutos según mes o día
     for i in range(6):
         time_temp = weekly_time(answer,i)
         days.append(time_temp)
     for f in range(7,10):
         time_temp = daily_time(answer,f)
         day.append(time_temp)
-    return 0
+    # Separa los días
+    study_days = s_days(answer)
+    return study_days,day,days
 
 
 def main():
     while True:
+        # Entrada
         option = information_input()
+        # Procedimiento
         if option == 1:
             x = option_1()
 
