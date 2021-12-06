@@ -116,6 +116,23 @@ def s_days(answer):
     return answer_1
 
 
+def time_assignment():
+    """
+    Esta función se encarga de asignar las horas de estudio, ocio,
+    entre otros. En caso de que no tenga que entrar a la función feel
+    sería el horario que debería mostar la opción 2 del programa.
+    """
+
+
+def feel():
+    """"
+    Esta función se encarga de dividir en jornadas más pequeñas, las
+    jornadas de estudio. Esto en caso de que el usuario reporte en la
+    decima pregunta que se encuentra mal debido a estrés o ansiedad.
+    """
+
+
+
 def option_1():
     """
     Esta función es la función para la primera opción que se encarga de
