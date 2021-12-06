@@ -18,28 +18,6 @@ def information_input():
     return option
 
 
-def time_answers(answer,i):
-    """
-    Esta función se encarga de dejar todas las respuestas relacionadas
-    al tiempo en una sola lista para así poder trabajarlas durante el 
-    largo del código.
-    """
-    i = "10:00-11:00;21:00-22:00"
-    answers = []
-    day = []
-    answers_1 = answer[i]
-    list_temp = answers_1.split(";")
-    for i in range(len(list_temp)):
-        temp = list_temp[i]
-        temp = temp.split("-")
-        temp_1 = temp[0]
-        day.append(temp_1)
-        temp_2 = temp[1]
-        day.append(temp_2)
-    answers.append(day)
-    return answers
-
-
 def questions():
     """
     Esta función se encarga de hacer las preguntas y recopilar todas 
@@ -64,35 +42,76 @@ def questions():
     question_5 = input("Ingrese su horario de clases del día"
                     " Sábado separado por ; (Ej: 9:00-10:00;10:00-11:00;etc.)"
                     ": ")
-    question_6 = input("Ingrese su horario de clases del día"
-                    " Domingo separado por ; (Ej: 9:00-10:00;10:00-11:00;etc.)"
-                    ": ")
-    question_7 = int(input("¿Cuantas horas le dedicas diariamente al estudio?, y" 
+    question_6 = input("¿Qué días estudia? Escriba los días separado por ;"
+                        "(Ej: viernes;sabado;domingo: ")
+    question_7 = input("¿Cuantas horas le dedicas diariamente al estudio?, y" 
                         " si no es así ¿Cuántas horas le gustaría dedicarle"
-                        " al estudio? (Ingrese un número entero en horas)"))
-    question_8 = int(input("¿Juega a algún videojuego?, si es así, ¿Cuantas" 
-                            " horas le dedica? (Ingrese un número entero en" 
-                            " horas)"))
-    question_9 = int(input("¿Cuantas horas le dedicas a tu tiempo con tu" 
-                        "familia?"))
-    question_10 = int(input("¿Como te has sentido? (Escriba bien o mal)"))
+                        " al estudio? (Siga la siguiente estructura xx:xx): ")
+    question_8 = input("¿Juega a algún videojuego?, si es así, ¿Cuantas" 
+                            " horas le dedica diariamente? (Siga la siguiente"
+                            " estructura (xx:xx): ")
+    question_9 = input("¿Cuantas horas le dedicas a tu tiempo con tu" 
+                        "familia?: ")
+    question_10 = input("¿Como te has sentido? (Escriba bien o mal): ")
     all_questions.extend([question_0,question_1,question_2,question_3,
                         question_4,question_5,question_6,question_7,
                         question_8,question_9,question_10])
     return all_questions
 
 
-def option_1(option):
-    answer = questions()
+def weekly_time(answer,i):
+    """
+    Esta función se encarga de dejar todas las respuestas relacionadas
+    al tiempo en una sola lista para así poder trabajarlas durante el 
+    largo del código. El tiempo d
+    """
+    answers = []
     day = []
-    for i in range(7):
-        time = time_answers(answer,i)
-        day.append(time)
-    return
+    answers_1 = answer[i]
+    answers_1 = answers_1.split(";")
+    for j in range(len(answers_1)):
+        temp = answers_1[j]
+        temp = temp.split("-")
+        temp_1 = temp[0]
+        temp_1_1 = temp_1.split(":")
+        temp_1_1[0] = int(temp_1_1[0])
+        temp_1_1[1] = int(temp_1_1[1])
+        day.append(temp_1_1)
+        temp_2 = temp[1]
+        temp_2_1 = temp_2.split(":")
+        temp_2_1[0] = int(temp_2_1[0])
+        temp_2_1[1] = int(temp_2_1[1])
+        day.append(temp_2_1)
+    answers.append(day)
+    return answers
+
+
+def daily_time(answer,f):
+    answer_1 = answer[f]
+    answer_1 = answer_1.split(":")
+    for j in range(2):
+        answer_1[j] = int(answer_1[j])
+    return answer_1
+
+
+def option_1():
+    answer = questions()
+    days = []
+    day = []
+    for i in range(6):
+        time_temp = weekly_time(answer,i)
+        days.append(time_temp)
+    for f in range(7,10):
+        time_temp = daily_time(answer,f)
+        day.append(time_temp)
+    return 0
 
 
 def main():
     while True:
         option = information_input()
         if option == 1:
-            u = option_1(option)
+            x = option_1()
+
+
+main()
