@@ -2,7 +2,7 @@
 Este es el archivo principal que se usará 
 """
 import tkinter as tk
-from files.preguntas import interface
+from lib.preguntas import interface
 
 # Bloque por definición
 def principal():

@@ -1,13 +1,12 @@
 import tkinter as tk
-import scrollbar as sc
+from lib.scrollbar import barra_de_desplazamiento
 
 def interface(ventana_principal):
     # Crear subventana
     preguntas = tk.Tk()
 
     # Crear Scrollbar
-    second_frame = sc.barra_de_desplazamiento(preguntas)
-
+    second_frame = barra_de_desplazamiento(preguntas)
 
     # Se crea etiqueta para presentar la opción de preguntas
     introduccion = tk.Label(second_frame, text = "a")
