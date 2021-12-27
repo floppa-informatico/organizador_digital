@@ -25,7 +25,7 @@ ventana.geometry("400x300")
 #def saludo(nombre):
 #    print("hola")
 
-# Crear boton, en donde se va a poner el voton, el texto, el tamaño en x e y, y conecta función con boton.
+# Crear boton, en donde se va a poner el boton, el texto, el tamaño en x e y, y conecta función con boton.
 # Pasando argumentos se le agrega la palabra lambda con los parentesis correspondientes de la función
 # boton1 = tkinter.Button(ventana, text = "Presiona", padx = 40, pady = 50, command = lambda: saludo())
 # Se pone en pantalla

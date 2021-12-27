@@ -1,3 +1,4 @@
+# Bloque por definición
 def information_input():
     """
     Esta función le mostrará al usuario, y un menú para lo que el
@@ -43,7 +44,7 @@ def questions():
                     " Sábado separado por ; (Ej: 9:00-10:00;10:00-11:00;etc.)"
                     ": ")
     question_6 = input("¿Qué días estudia? Escriba los días separado por ;"
-                        "(Ej: viernes;sabado;domingo: ")
+                        "(Ej: viernes;sabado;domingo)")
     question_7 = input("¿Cuantas horas le dedicas diariamente al estudio?, y" 
                         " si no es así ¿Cuántas horas le gustaría dedicarle"
                         " al estudio? (Siga la siguiente estructura xx:xx): ")
@@ -132,7 +133,6 @@ def feel():
     """
 
 
-
 def option_1():
     """
     Esta función es la función para la primera opción que se encarga de
@@ -155,13 +155,23 @@ def option_1():
     return study_days,day,days
 
 
-def main():
-    while True:
-        # Entrada
-        option = information_input()
-        # Procedimiento
-        if option == 1:
-            x = option_1()
+def help():
+    print("Esta aplicación organizador digital tiene el proposito de \n"
+    "mejorar la salud mental de l@s estudiantes.\n\n Esta aplicación consta"
+    "de seis opciones distintas, la primera en la que se le pregunta al\n"
+    "usuario acerca de sus horarios. Se pide por favor seguir la estructura\n"
+    "pedida, ya que es de importancia para que el programa funcione\n"
+    "correctamente.\n La segunda opción solo muestra el horario hecho, si"
+    "el usuario no ha ingresado nada dará error.\n"
+    "La tercera preguntará al usuario ")
 
 
-main()
+# Bloque principal
+while True:
+    # Entrada
+    option = information_input()
+    # Procedimiento
+    if option == 1:
+        x = option_1()
+    elif option == 6:
+        break
