@@ -1,68 +1,73 @@
 import tkinter as tk
+import scrollbar as sc
 
 def interface(ventana_principal):
     # Crear subventana
     preguntas = tk.Tk()
 
+    # Crear Scrollbar
+    second_frame = sc.barra_de_desplazamiento(preguntas)
+
+
     # Se crea etiqueta para presentar la opción de preguntas
-    introduccion = tk.Label(preguntas, text = "a")
+    introduccion = tk.Label(second_frame, text = "a")
 
     # Crear etiquetas para preguntas
-    pregunta_1 = tk.Label(preguntas, text = "Para comenzar, ingrese su" 
+    pregunta_1 = tk.Label(second_frame, text = "Para comenzar, ingrese su" 
                     " horario de clases del día Lunes separado por ; (Ej: 9:0"
                     "0-10:00;10:00-11:00;etc.)")
-    pregunta_2 = tk.Label(preguntas, text = "Ingrese su horario de clases del" 
+    pregunta_2 = tk.Label(second_frame, text = "Ingrese su horario de clases del" 
                     " día Martes separado por ; (Ej: 9:00-10:00;10:00-11:00;"
                     "etc.)")
-    pregunta_3 = tk.Label(preguntas, text = "Ingrese su horario de clases del" 
+    pregunta_3 = tk.Label(second_frame, text = "Ingrese su horario de clases del" 
                     " día Miércoles separado por ; (Ej: 9:00-10:00;10:00-"
                     "11:00;etc.)")
-    pregunta_4 = tk.Label(preguntas, text = "Ingrese su horario de clases del día"
+    pregunta_4 = tk.Label(second_frame, text = "Ingrese su horario de clases del día"
                     " Jueves separado por ; (Ej: 9:00-10:00;10:00-11:00;etc.)"
                     ": ")
-    pregunta_5 = tk.Label(preguntas, text = "Ingrese su horario de clases del día"
+    pregunta_5 = tk.Label(second_frame, text = "Ingrese su horario de clases del día"
                     " Viernes separado por ; (Ej: 9:00-10:00;10:00-11:00;etc.)"
                     ": ")
-    pregunta_6 = tk.Label(preguntas, text = "Ingrese su horario de clases del día"
+    pregunta_6 = tk.Label(second_frame, text = "Ingrese su horario de clases del día"
                     " Sábado separado por ; (Ej: 9:00-10:00;10:00-11:00;etc.)"
                     ": ")
-    pregunta_7 = tk.Label(preguntas, text = "¿Qué días estudia? Escriba los días separado por ;"
+    pregunta_7 = tk.Label(second_frame, text = "¿Qué días estudia? Escriba los días separado por ;"
                         "(Ej: viernes;sabado;domingo)")
-    pregunta_8 = tk.Label(preguntas, text = "¿Cuantas horas le dedicas diariamente al estudio?, y" 
+    pregunta_8 = tk.Label(second_frame, text = "¿Cuantas horas le dedicas diariamente al estudio?, y" 
                         " si no es así \n ¿Cuántas horas le gustaría dedicarle"
                         " al estudio? (Siga la siguiente estructura xx:xx): ")
-    pregunta_9 = tk.Label(preguntas, text = "¿Juega a algún videojuego?, si es así, \n ¿Cuantas" 
+    pregunta_9 = tk.Label(second_frame, text = "¿Juega a algún videojuego?, si es así, \n ¿Cuantas" 
                             " horas le dedica diariamente? (Siga la siguiente"
                             " estructura (xx:xx): ")
-    pregunta_10 = tk.Label(preguntas, text = "¿Cuantas horas le dedicas a tu tiempo con tu" 
+    pregunta_10 = tk.Label(second_frame, text = "¿Cuantas horas le dedicas a tu tiempo con tu" 
                         "familia?: ")
-    pregunta_11 = tk.Label(preguntas, text = "¿Como te has sentido? (Escriba bien o mal): ")
+    pregunta_11 = tk.Label(second_frame, text = "¿Como te has sentido? (Escriba bien o mal): ")
 
     # Entrada para introducir texto
-    respuesta_1 = tk.Entry(preguntas)
-    respuesta_2 = tk.Entry(preguntas)
-    respuesta_3 = tk.Entry(preguntas)
-    respuesta_4 = tk.Entry(preguntas)
-    respuesta_5 = tk.Entry(preguntas)
-    respuesta_6 = tk.Entry(preguntas)
-    respuesta_7 = tk.Entry(preguntas)
-    respuesta_8 = tk.Entry(preguntas)
-    respuesta_9 = tk.Entry(preguntas)
-    respuesta_10 = tk.Entry(preguntas)
-    respuesta_11 = tk.Entry(preguntas)
+    respuesta_1 = tk.Entry(second_frame)
+    respuesta_2 = tk.Entry(second_frame)
+    respuesta_3 = tk.Entry(second_frame)
+    respuesta_4 = tk.Entry(second_frame)
+    respuesta_5 = tk.Entry(second_frame)
+    respuesta_6 = tk.Entry(second_frame)
+    respuesta_7 = tk.Entry(second_frame)
+    respuesta_8 = tk.Entry(second_frame)
+    respuesta_9 = tk.Entry(second_frame)
+    respuesta_10 = tk.Entry(second_frame)
+    respuesta_11 = tk.Entry(second_frame)
 
     # Boton para introducir texto
-    boton_1 = tk.Button(preguntas, padx = 20, pady = 20)
-    boton_2 = tk.Button(preguntas, padx = 20, pady = 20)
-    boton_3 = tk.Button(preguntas, padx = 20, pady = 20)
-    boton_4 = tk.Button(preguntas, padx = 20, pady = 20)
-    boton_5 = tk.Button(preguntas, padx = 20, pady = 20)
-    boton_6 = tk.Button(preguntas, padx = 20, pady = 20)
-    boton_7 = tk.Button(preguntas, padx = 20, pady = 20)
-    boton_8 = tk.Button(preguntas, padx = 20, pady = 20)
-    boton_9 = tk.Button(preguntas, padx = 20, pady = 20)
-    boton_10 = tk.Button(preguntas, padx = 20, pady = 20)
-    boton_11 = tk.Button(preguntas, padx = 20, pady = 20)
+    boton_1 = tk.Button(second_frame, padx = 20, pady = 20)
+    boton_2 = tk.Button(second_frame, padx = 20, pady = 20)
+    boton_3 = tk.Button(second_frame, padx = 20, pady = 20)
+    boton_4 = tk.Button(second_frame, padx = 20, pady = 20)
+    boton_5 = tk.Button(second_frame, padx = 20, pady = 20)
+    boton_6 = tk.Button(second_frame, padx = 20, pady = 20)
+    boton_7 = tk.Button(second_frame, padx = 20, pady = 20)
+    boton_8 = tk.Button(second_frame, padx = 20, pady = 20)
+    boton_9 = tk.Button(second_frame, padx = 20, pady = 20)
+    boton_10 = tk.Button(second_frame, padx = 20, pady = 20)
+    boton_11 = tk.Button(second_frame, padx = 20, pady = 20)
 
     # Se usa método grid para poner en pantalla los widgets
     introduccion.grid(row = 0, column = 0)

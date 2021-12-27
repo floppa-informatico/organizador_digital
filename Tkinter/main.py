@@ -44,7 +44,8 @@ menu_principal = tk.Tk()
 menu_principal.title("organizador_digital")
 
 # Invocamos la función encargada de la interfaz
-principal()
+if __name__ == "__main__":
+    principal()
 
 # Muestra todo en pantalla y responde a la entrada del usuario hasta 
 # que el programa se termina
