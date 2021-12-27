@@ -1,17 +1,18 @@
 import tkinter as tk
 from tkinter.constants import BOTH, LEFT, RIGHT, VERTICAL, Y
+from tkinter import ttk
 
 def barra_de_desplazamiento(preguntas):
     # Crear un Frame principal donde se contendrá todo
     main_frame = tk.Frame(preguntas)
-    main_frame.pack(fill = BOTH, expand = True)
+    main_frame.grid(row = 0, column = 0)
 
     # Crear un Canvas
     canvas_1 = tk.Canvas(main_frame)
     canvas_1.pack(side = LEFT, fill = BOTH, expand = True)
 
     # Agregar Scrollbar al Canvas
-    my_scrollbar = tk.Scrollbar(main_frame, orient = VERTICAL, command = canvas_1.yview)
+    my_scrollbar = ttk.Scrollbar(main_frame, orient = VERTICAL, command = canvas_1.yview)
     my_scrollbar.pack(side = RIGHT, fill = Y)
 
     # Configurar el Canvas para tener el scrollbar
