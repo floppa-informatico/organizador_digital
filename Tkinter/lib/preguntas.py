@@ -1,6 +1,9 @@
 import tkinter as tk
 from tkinter.ttk import Button, Frame, Label
 from lib.scrollbar import barra_de_desplazamiento
+import sys 
+sys.path.append("organizador_digital/proc/")
+from proc import sep_days
 
 def interface(ventana_principal):
     # Crear subventana
@@ -57,17 +60,18 @@ def interface(ventana_principal):
     respuesta_11 = tk.Entry(second_frame)
 
     # Boton para introducir texto
-    boton_1 = tk.Button(second_frame, text= "Enviar", padx = 20, pady = 10)
-    boton_2 = tk.Button(second_frame, text= "Enviar", padx = 20, pady = 10)
-    boton_3 = tk.Button(second_frame, text= "Enviar", padx = 20, pady = 10)
-    boton_4 = tk.Button(second_frame, text= "Enviar", padx = 20, pady = 10)
-    boton_5 = tk.Button(second_frame, text= "Enviar", padx = 20, pady = 10)
-    boton_6 = tk.Button(second_frame, text= "Enviar", padx = 20, pady = 10)
-    boton_7 = tk.Button(second_frame, text= "Enviar", padx = 20, pady = 10)
-    boton_8 = tk.Button(second_frame, text= "Enviar", padx = 20, pady = 10)
-    boton_9 = tk.Button(second_frame, text= "Enviar", padx = 20, pady = 10)
-    boton_10 = tk.Button(second_frame, text= "Enviar", padx = 20, pady = 10)
-    boton_11 = tk.Button(second_frame, text= "Enviar", padx = 20, pady = 10)
+    todas_las_respuestas = []
+    boton_1 = tk.Button(second_frame, text= "Enviar", padx = 20, pady = 10, command = lambda: r_1(todas_las_respuestas,respuesta_1))
+    boton_2 = tk.Button(second_frame, text= "Enviar", padx = 20, pady = 10, command = lambda: r_1(todas_las_respuestas,respuesta_2))
+    boton_3 = tk.Button(second_frame, text= "Enviar", padx = 20, pady = 10, command = lambda: r_1(todas_las_respuestas,respuesta_3))
+    boton_4 = tk.Button(second_frame, text= "Enviar", padx = 20, pady = 10, command = lambda: r_1(todas_las_respuestas,respuesta_4))
+    boton_5 = tk.Button(second_frame, text= "Enviar", padx = 20, pady = 10, command = lambda: r_1(todas_las_respuestas,respuesta_5))
+    boton_6 = tk.Button(second_frame, text= "Enviar", padx = 20, pady = 10, command = lambda: r_1(todas_las_respuestas,respuesta_6))
+    boton_7 = tk.Button(second_frame, text= "Enviar", padx = 20, pady = 10, command = lambda: r_1(todas_las_respuestas,respuesta_7))
+    boton_8 = tk.Button(second_frame, text= "Enviar", padx = 20, pady = 10, command = lambda: r_1(todas_las_respuestas,respuesta_8))
+    boton_9 = tk.Button(second_frame, text= "Enviar", padx = 20, pady = 10, command = lambda: r_1(todas_las_respuestas,respuesta_9))
+    boton_10 = tk.Button(second_frame, text= "Enviar", padx = 20, pady = 10, command = lambda: r_1(todas_las_respuestas,respuesta_10))
+    boton_11 = tk.Button(second_frame, text= "Enviar", padx = 20, pady = 10, command = lambda: r_1(todas_las_respuestas,respuesta_11))
 
     # Se usa método grid para poner en pantalla los widgets
     introduccion.grid(row = 0, column = 0)
@@ -105,38 +109,30 @@ def interface(ventana_principal):
     boton_10.grid(row = 20, column = 1)
     boton_11.grid(row = 22, column = 1)
 
-    # Dejar todas las respuestas en una lista
-    elemento_1 = respuesta_1.get()
-    elemento_2 = respuesta_2.get()
-    elemento_3 = respuesta_3.get()
-    elemento_4 = respuesta_4.get()
-    elemento_5 = respuesta_5.get()
-    elemento_6 = respuesta_6.get()
-    elemento_7 = respuesta_7.get()
-    elemento_8 = respuesta_8.get()
-    elemento_9 = respuesta_9.get()
-    elemento_10 = respuesta_10.get()
-    elemento_11 = respuesta_11.get()
-
-    todas_las_respuestas = []
-    todas_las_respuestas.extend([elemento_1,elemento_2,elemento_3,elemento_4,
-                                elemento_5,elemento_6,elemento_7,elemento_8,
-                                elemento_9,elemento_10,elemento_11])
-
     # Boton para volver
-    boton_volver = tk.Button(second_frame, text = "Volver al menú", padx = 20, pady = 10, command = lambda: retornar(ventana_principal,preguntas))
+    boton_volver = tk.Button(second_frame, text = "Volver al menú", padx = 20,
+                             pady = 10, command = lambda: retornar
+                             (ventana_principal,preguntas,todas_las_respuestas))
     # Se usa grid para poner el botón
     for i_para_etiqueta in range(1,3):
-        etiqueta_vacia = Label(second_frame, text="").grid(row = i_para_etiqueta + 22, column = 0)
+        etiqueta_vacia = Label(second_frame, text="").grid(
+                        row = i_para_etiqueta + 22, column = 0)
     boton_volver.grid(row = 25, column = 1)
 
     # Cerrar ventana principal
     ventana_principal.withdraw()
     preguntas.mainloop()
-    return todas_las_respuestas
 
-def retornar(ventana_principal,preguntas):
+def retornar(ventana_principal,preguntas,todas_las_respuestas):
+    # Pasa todas las respuestas para ser procesadas a sep_days
+    sep_days.option_1(todas_las_respuestas)
     # Vuelve a abrir la ventana principal
     ventana_principal.deiconify()
     # Cierra la subventana
     preguntas.destroy()
+
+
+def r_1(todas_las_respuestas,respuesta):
+    elemento = respuesta.get()
+    todas_las_respuestas.append(elemento)
+    return todas_las_respuestas
