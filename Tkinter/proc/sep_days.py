@@ -1,3 +1,6 @@
+from verificador import Verificador
+from tkinter import messagebox
+
 def weekly_time(answer,i):
     """
     Esta función se encarga de dejar todas las respuestas relacionadas
@@ -59,15 +62,21 @@ def option_1(answer):
     de manera interna pueda hacer el horario para el usuario totalmente
     adapto a él. El usuario podra ver el horario en la opción 2.
     """
-    days = []
-    day = []
-    # Separa las horas de los minutos según mes o día
-    for i in range(6):
-        time_temp = weekly_time(answer,i)
-        days.append(time_temp)
-    for f in range(7,10):
-        time_temp = daily_time(answer,f)
-        day.append(time_temp)
-    # Separa los días
-    study_days = s_days(answer)
-    return study_days,day,days
+    if Verificador(answer):
+        days = []
+        day = []
+        # Separa las horas de los minutos según mes o día
+        for i in range(6):
+            time_temp = weekly_time(answer,i)
+            days.append(time_temp)
+        for f in range(7,10):
+            time_temp = daily_time(answer,f)
+            day.append(time_temp)
+        # Separa los días
+        study_days = s_days(answer)
+        # Informa al usuario que ha introducido bien los datos
+        messagebox.showinfo("Ha sido un éxito","Has introducido los datos correctamente")
+        return study_days,day,days
+    else:
+        # Informa al usuario que no siguió la estructura propuesta.
+        messagebox.showerror("Error","Los datos que introduciste no cumplen la estructura planteada")

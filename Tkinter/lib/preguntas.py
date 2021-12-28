@@ -132,7 +132,7 @@ def retornar(ventana_principal,preguntas,todas_las_respuestas):
     if len(todas_las_respuestas) == 11:
         sep_days.option_1(todas_las_respuestas)
     else:
-        messagebox.showerror("Advertencia","No ha completado todas las preguntas")
+        messagebox.showwarning("Advertencia","No ha completado todas las preguntas")
 
 
 def r_1(todas_las_respuestas,respuesta):
