@@ -4,10 +4,11 @@ from lib.scrollbar import barra_de_desplazamiento
 import sys 
 sys.path.append("organizador_digital/proc/")
 from proc import sep_days
+from tkinter import messagebox
 
 def interface(ventana_principal):
     # Crear subventana
-    preguntas = tk.Tk()
+    preguntas = tk.Toplevel()
 
     preguntas.title("organizador digital")
 
@@ -121,18 +122,25 @@ def interface(ventana_principal):
 
     # Cerrar ventana principal
     ventana_principal.withdraw()
-    preguntas.mainloop()
 
 def retornar(ventana_principal,preguntas,todas_las_respuestas):
-    # Pasa todas las respuestas para ser procesadas a sep_days
-    sep_days.option_1(todas_las_respuestas)
     # Vuelve a abrir la ventana principal
     ventana_principal.deiconify()
     # Cierra la subventana
     preguntas.destroy()
+    # Pasa todas las respuestas para ser procesadas a sep_days
+    if len(todas_las_respuestas) == 11:
+        sep_days.option_1(todas_las_respuestas)
+    else:
+        messagebox.showerror("Advertencia","No ha completado todas las preguntas")
 
 
 def r_1(todas_las_respuestas,respuesta):
     elemento = respuesta.get()
-    todas_las_respuestas.append(elemento)
-    return todas_las_respuestas
+    if elemento == "" or elemento == " ":
+        messagebox.showerror("Error","¡Es espacio está vacío!")
+    if elemento[0] == " " and elemento[1] != " ":
+        messagebox.showerror("Error","¡Hay un espacio al inicio!")
+    else:
+        todas_las_respuestas.append(elemento)
+        return todas_las_respuestas
