@@ -1,7 +1,9 @@
 import sys 
 sys.path.append("/proc/")
 import verificador
-from tkinter import messagebox
+from tkinter import messagebox 
+sys.path.append("/data/")
+from data import archivos
 
 
 def weekly_time(answer,i):
@@ -79,7 +81,7 @@ def option_1(answer):
         study_days = s_days(answer)
         # Informa al usuario que ha introducido bien los datos
         messagebox.showinfo("Ha sido un éxito","Has introducido los datos correctamente")
-        return study_days,day,days # Queda esto pendiente
+        archivos.escribir_archivo(study_days,day,days)
     else:
         # Informa al usuario que no siguió la estructura propuesta.
         messagebox.showerror("Error","Los datos que introduciste no cumplen la estructura planteada")

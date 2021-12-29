@@ -5,6 +5,8 @@ import sys
 sys.path.append("organizador_digital/proc/")
 from proc import sep_days
 from tkinter import messagebox
+sys.path.append("organizador_digital/data/")
+from data import archivos
 
 
 def interface(ventana_principal):
@@ -170,6 +172,9 @@ def retornar(ventana_principal,preguntas,todas_las_respuestas):
     preguntas.destroy()
     # Pasa todas las respuestas para ser procesadas a sep_days
     if len(todas_las_respuestas) == 11:
+        # Borra el txt existente
+        archivos.borrar_archivo()
+        # Pasa todas las respuestas del usuario para ser procesadas
         sep_days.option_1(todas_las_respuestas)
     else:
         messagebox.showwarning("Advertencia","No ha completado todas las "
@@ -195,7 +200,7 @@ def r_1(todas_las_respuestas,respuesta):
     # primera instancia a lo pedido
     if elemento == "" or elemento == " ":
         messagebox.showerror("Error","¡Es espacio está vacío!")
-    if elemento[0] == " " and elemento[1] != " ":
+    elif elemento[0] == " " and elemento[1] != " ":
         messagebox.showerror("Error","¡Hay un espacio al inicio!")
     else:
         # Si cumple, se agrega a la lista y se retorna a la funcion
