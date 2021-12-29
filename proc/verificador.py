@@ -9,9 +9,11 @@ def Verificador(answer):
     doble de la cantidad de "-". El tercer criterio es si al eliminar
     los caracteres de ";" en caso de tenerlo, el ":" y el "-",
     si se encuentran solo números enteros positivos (ya que el tiempo
-    jamas sera negativo) sera verdadero. El ultimo criterio es si
-    el string de estado de animo (bien o mal) al ponerlo en minusculas
-    es igual a "bien" o "mal".
+    jamas sera negativo) sera verdadero. El cuarto criterio es si al
+    separar el string convirtiendolo a lista mediante split separandolo
+    por medio de ";" quedan nombres de día de la semana. El ultimo 
+    criterio es si el string de estado de animo (bien o mal) al ponerlo 
+    en minusculas es igual a "bien" o "mal".
     Esta funcion tiene como entrada la lista de respuestas en esta
     funcion llamada "answer", siendo de tipo list.
     Teniendo como salida un booleano para el archivo sep_days.py.
@@ -21,15 +23,18 @@ def Verificador(answer):
     primero = False
     segundo = False
     tercero = False
+    cuarto = False
     final = False
     # este ciclo tiene el proposito de recorrer la lista
     for j in range(len(answer)):
         # Verifica el 4to criterio
         if answer[j].lower() == "bien" or answer[j].lower() == "mal":
-            final = True          
-        else:
-            # Se recorre los string de tiempo siendo estos elementos de
-            # la lista
+            final = True
+        elif answer[j][0].lower() == "l" or answer[j][0].lower() == "m" or \
+        answer[j][0].lower() == "j" or answer[j][0].lower() == "v" or \
+        answer[j][0].lower() == "s" or answer[j][0].lower() == "d":
+            cuarto = dias_independientes(answer,j,cuarto)
+        else: 
             i = 0
             while i < len(answer[j]):
                 # Verifica si tiene ";" en el string
@@ -45,9 +50,10 @@ def Verificador(answer):
                     primero, segundo, tercero = contador(answer,j,primero,
                                                         segundo,tercero)
                 i += 1
+            
     # Realiza una operacion "and" para verificar que en su conjunto las
     # respuestas cumplen con los criterios       
-    resultado = primero and segundo and tercero and final
+    resultado = primero and segundo and tercero and cuarto and final
     # Se devuelve el resultado al archivo sep_day.py
     return resultado
 
@@ -107,3 +113,38 @@ def contador(answer,j,primero,segundo,tercero):
                         if contador == len(temp):
                             tercero = True
     return primero, segundo, tercero
+
+
+def dias_independientes(answer,j,cuarto):
+    """
+    Esta función se encarga de verificar si se cumple la estructura
+    de la pregunta en la que pide los días de estudio.
+    Esta función tiene de entrada la lista de respuestas del usuario
+    siendo este de tipo de list, tambien el iterador j siendo este de
+    tipo int, y por ultimo el cuarto criterio "cuarto" siendo este de
+    tipo booleano.
+    Esta función tiene como salida el booleano cuarto.
+    """
+    # Se recorre los string de tiempo siendo estos elementos de
+    # la lista
+    if answer[j].count(";") != 0:
+        temp_0 = answer[j].split(";")
+    else:
+        answer[j] = answer[j] + ";" + answer[j]
+        temp_0 = answer[j].split(";")
+    dias = ["lunes","martes","miercoles","jueves","viernes","sabado",
+                    "domingo"]
+    contador = 0
+    for k in range(len(temp_0)):
+        acumulador = False    
+        for p in dias:
+            acumulador = temp_0[k] == p or acumulador    
+            if acumulador:
+                contador += 1
+                # Si las veces que fue verdadero el acumulador
+                # coincide con el largo de la lista temp,
+                # significa que todos los elementos que
+                # quedaron en la lista, son enteros.
+                if contador == len(temp_0):
+                    cuarto = True
+    return cuarto  

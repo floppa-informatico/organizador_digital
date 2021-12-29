@@ -3,6 +3,15 @@ from tkinter.constants import BOTH, LEFT, RIGHT, VERTICAL, Y
 from tkinter import ttk
 
 def barra_de_desplazamiento(preguntas):
+    """
+    Esta función se encarga de crear una barra de desplazamiento
+    con el fin de poder desplazar el texto para futuras actualizaciones
+    en caso de que se vayan a agregar mas preguntas.
+    Esta función tiene como entrada la ventana creada para las
+    preguntas llamada "preguntas", siendo este dato propio de tkinter.
+    Y tiene como salida el Frame Secundario creado siendo este dato
+    propio de tkinter.
+    """
     # Crear un Frame principal donde se contendrá todo
     main_frame = tk.Frame(preguntas)
     main_frame.grid(row = 0, column = 0)

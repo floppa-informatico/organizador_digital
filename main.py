@@ -3,11 +3,14 @@ Este es el archivo principal que se usará
 """
 import tkinter as tk
 from lib.preguntas import interface
+from lib.horario import tabla
+
 
 # Bloque por definición
 def principal():
     """
     Esta función se encarga de la interfaz grafica del menú principal.
+    Esta función no tiene entradas, solo se encarga de lo ya mencionado
     """
     # Etiqueta
     presentacion_etiqueta = tk.Label(menu_principal, text = "Bienvenid@ a " 
@@ -22,9 +25,8 @@ def principal():
                         " responder las \n preguntas", padx= 12, pady = 12,
                         command = lambda: interface(menu_principal))
     verhorario_boton = tk.Button(menu_principal, text = "Ver mi horario", 
-                            padx= 12, pady = 12)
-    modhorario_boton = tk.Button(menu_principal, text = "Modificar mi horario", 
-                            padx= 12, pady = 12)
+                                padx= 12, pady = 12, command = 
+                                lambda: tabla(menu_principal))
     sientes_boton = tk.Button(menu_principal, text = "¿Cómo te sientes?", 
                             padx= 12, pady = 12)
     uso_boton = tk.Button(menu_principal, text = "¿Cómo se usa \n esta"
@@ -32,10 +34,9 @@ def principal():
 
     # Se usa grid para botones
     preguntas_boton.grid(row = 3, column = 2)
-    verhorario_boton.grid(row = 3, column = 4)
-    modhorario_boton.grid(row = 3, column = 6)
+    verhorario_boton.grid(row = 3, column = 6)
     sientes_boton.grid(row = 4, column = 2)
-    uso_boton.grid(row = 4, column = 4)
+    uso_boton.grid(row = 4, column = 6)
 
 # Bloque principal
 # Creamos la ventana
