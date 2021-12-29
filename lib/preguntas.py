@@ -54,10 +54,9 @@ def interface(ventana_principal):
                         " diariamente al estudio?, y si no es así \n ¿Cuántas"
                         " horas le gustaría dedicarle al estudio? (Siga la"
                         " siguiente estructura xx:xx)")
-    pregunta_9 = tk.Label(second_frame, text = "¿Juega a algún videojuego?,"
-                            " si es así, \n ¿Cuantas horas le dedica"
-                            " diariamente? (Siga la siguiente estructura"
-                            " xx:xx)")
+    pregunta_9 = tk.Label(second_frame, text = "Si tiene algún ocio, ¿Cuantas"
+                        " horas le dedica? (Siga la siguiente estructura"
+                        " xx:xx)")
     pregunta_10 = tk.Label(second_frame, text = "¿Cuantas horas le dedicas a"
                         " tu tiempo con tu familia? (Siga la siguiente"
                         " estructura xx:xx)")
