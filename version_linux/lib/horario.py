@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import sys
-sys.path.append("/data/")
+sys.path.append("./data/")
 from data import archivos
 
 

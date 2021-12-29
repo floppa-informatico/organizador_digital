@@ -2,10 +2,10 @@ import tkinter as tk
 from tkinter.ttk import Button, Frame, Label
 from lib.scrollbar import barra_de_desplazamiento
 import sys 
-sys.path.append("organizador_digital/proc/")
+sys.path.append("./proc/")
 from proc import sep_days
 from tkinter import messagebox
-sys.path.append("organizador_digital/data/")
+sys.path.append("./data/")
 from data import archivos
 
 
