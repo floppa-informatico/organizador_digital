@@ -74,7 +74,9 @@ def principal():
     uso_boton.grid(row = 4, column = 4)
     borrar_datos_boton.grid(row = 4, column = 6)
 
+
 # Bloque principal
+
 # Creamos la ventana
 menu_principal = tk.Tk()
 # Dimensión de ventana

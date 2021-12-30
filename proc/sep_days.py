@@ -4,6 +4,7 @@ from tkinter import messagebox
 import data.archivos as archivos 
 
 
+# Bloque por definición
 def weekly_time(answer,i):
     """
     Esta función se encarga de dejar todas las respuestas relacionadas
@@ -78,8 +79,10 @@ def option_1(answer):
         # Separa los días
         study_days = s_days(answer)
         # Informa al usuario que ha introducido bien los datos
-        messagebox.showinfo("Ha sido un éxito","Has introducido los datos correctamente")
+        messagebox.showinfo("Ha sido un éxito","Has introducido los datos"
+                            " correctamente")
         archivos.escribir_archivo(study_days,day,days)
     else:
         # Informa al usuario que no siguió la estructura propuesta.
-        messagebox.showerror("Error","Los datos que introduciste no cumplen la estructura planteada")
+        messagebox.showerror("Error","Los datos que introduciste no cumplen"
+                            " la estructura planteada")

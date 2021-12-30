@@ -1,3 +1,4 @@
+# Bloque por definición
 def escribir_archivo(study_days,day,days):
     """
     Esta función se encarga una vez trabajado los datos para poder
@@ -39,6 +40,7 @@ def leer_archivo_1():
         day = lista_temporal[1]
         days = lista_temporal[2]
     return study_days,day,days
+
 
 def leer_archivo_2():
     """

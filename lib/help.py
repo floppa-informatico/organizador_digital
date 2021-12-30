@@ -1,7 +1,14 @@
 import tkinter as tk
 
 
+# Bloque por definición
 def ayuda(ventana_principal):
+    """
+    Esta función es la encargada de crear la subventana de la sección
+    de ayuda.
+    Esta función tiene como entrada la ventana del menú prinicipal 
+    siendo este dato propio de tkinter.
+    """
     # Crear subventana
     ventana_ayuda = tk.Toplevel(ventana_principal)
     # Crear titulo
@@ -39,6 +46,10 @@ def ayuda(ventana_principal):
 
 
 def retornar(ventana_principal,ventana_ayuda):
+    """
+    Esta función tiene el propósito de cerrar la subventana
+    y volver al menú.
+    """
     # Vuelve a abrir la ventana principal
     ventana_principal.deiconify()
     # Cierra la subventana

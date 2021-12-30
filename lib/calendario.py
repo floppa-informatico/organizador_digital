@@ -3,15 +3,22 @@ from tkinter import messagebox
 import data.archivos as archivos
 import tkcalendar as calendar
 import datetime
-
 from lib.preguntas import retornar
 
 
+# Bloque por definición
 def Calendario(ventana_principal):
+    """
+    Esta función es la encargada de crear la subventana para el 
+    calendario que tendrá acceso el usuario.
+    Esta función tiene como entrada la ventana del menú, siendo
+    este un dato propio de tkinter.
+    """
     # Leer txt para comprobar que el archivo tenga datos o no
     lista_comprobacion = archivos.leer_archivo_2()
     if lista_comprobacion == []:
-        messagebox.showerror("Error","¡Primero debes completar las preguntas!")
+        messagebox.showerror("Error","¡Primero debes completar las"
+                            " preguntas!")
     else: 
         # Crear subventana
         calendari0 = tk.Toplevel(ventana_principal)
@@ -25,13 +32,14 @@ def Calendario(ventana_principal):
         year = int(tiempo.strftime("%Y"))
 
         # Crear calendario
-        cal = calendar.Calendar(calendari0, selectmode = "day", year = year, mouth = mes, day = dia)
+        cal = calendar.Calendar(calendari0, selectmode = "day", year = year, 
+                                mouth = mes, day = dia)
         cal.grid(column = 0, row = 0)
         
 
         # Boton para volver
-        boton_volver = tk.Button(calendari0, text = "Volver al menú", padx = 20,
-                             pady = 10, command = lambda: 
+        boton_volver = tk.Button(calendari0, text = "Volver al menú", 
+                            padx = 20, pady = 10, command = lambda: 
                              retornar(ventana_principal,calendari0))
                              
     
@@ -46,6 +54,10 @@ def Calendario(ventana_principal):
 
 
 def retornar(ventana_principal,calendar):
+    """
+    Esta función tiene el propósito de cerrar la subventana
+    y volver al menú.
+    """
     # Vuelve a abrir la ventana principal
     ventana_principal.deiconify()
     # Cierra la subventana

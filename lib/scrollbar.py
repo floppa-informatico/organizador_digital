@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter.constants import BOTH, LEFT, RIGHT, VERTICAL, Y
 from tkinter import ttk
 
+
+# Bloque por definición
 def barra_de_desplazamiento(preguntas):
     """
     Esta función se encarga de crear una barra de desplazamiento
@@ -21,12 +23,14 @@ def barra_de_desplazamiento(preguntas):
     canvas_1.pack(side = LEFT, fill = BOTH, expand = True)
 
     # Agregar Scrollbar al Canvas
-    my_scrollbar = ttk.Scrollbar(main_frame, orient = VERTICAL, command = canvas_1.yview)
+    my_scrollbar = ttk.Scrollbar(main_frame, orient = VERTICAL, command = 
+                                canvas_1.yview)
     my_scrollbar.pack(side = RIGHT, fill = Y)
 
     # Configurar el Canvas para tener el scrollbar
     canvas_1.configure(yscrollcommand = my_scrollbar.set)
-    canvas_1.bind("<Configure>", lambda e: canvas_1.configure(scrollregion = canvas_1.bbox("all")))
+    canvas_1.bind("<Configure>", lambda e: canvas_1.configure(scrollregion = 
+                                                        canvas_1.bbox("all")))
 
     # Crear otro Frame dentro del Canvas
     second_frame = tk.Frame(canvas_1)

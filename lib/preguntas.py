@@ -6,6 +6,7 @@ from tkinter import messagebox
 import data.archivos as archivos
 
 
+# Bloque por definición
 def interface(ventana_principal):
     """
     Esta función tiene la función de mostar la ventana de las preguntas
@@ -23,7 +24,19 @@ def interface(ventana_principal):
     second_frame.grid(column=0,row=0, rowspan=9)
 
     # Se crea etiqueta para presentar la opción de preguntas
-    introduccion = tk.Label(second_frame, text = "a")
+    introduccion = tk.Label(second_frame, text = "Bienvenid@ a la sección de"
+                            " preguntas. Para obtener un horario 100%"
+                            " adaptado a sus necesidades\ndebe responder"
+                            " estas preguntas. Siga cuidadosamente la"
+                            " estructura pedida en cada pregunta. En\n"
+                            "aquellas preguntas en donde debe ingresar más de"
+                            " un dato, debe ir separado con “;”, sin que esta"
+                            "\nquede al final (ejemplo: 9:00-10:00;"
+                            "11:00:12:00 ). Cada vez que responda a una"
+                            " pregunta\npulse el botón de enviar. Una vez que"
+                            " haya respondido todos las preguntas, pulsando"
+                            " su\nrespectivo botón, ya puede volver al menú"
+                            " pulsando en el botón correspondiente.")
 
     # Crear etiquetas para preguntas
     pregunta_1 = tk.Label(second_frame, text = "    Para comenzar, ingrese su" 

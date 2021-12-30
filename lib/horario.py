@@ -3,7 +3,14 @@ from tkinter import messagebox
 import data.archivos as archivos
 
 
+# Bloque por definición
 def tabla(ventana_principal):
+    """
+    Esta función es la encargada de crear la subventana para el 
+    horario que tendrá acceso el usuario.
+    Esta función tiene como entrada la ventana del menú, siendo
+    este un dato propio de tkinter.
+    """
     # Leer txt para comprobar que el archivo tenga datos o no
     lista_comprobacion = archivos.leer_archivo_2()
     if lista_comprobacion == []:
@@ -32,6 +39,10 @@ def tabla(ventana_principal):
 
 
 def retornar(ventana_principal,organizacion):
+    """
+    Esta función tiene el propósito de cerrar la subventana
+    y volver al menú.
+    """
     # Vuelve a abrir la ventana principal
     ventana_principal.deiconify()
     # Cierra la subventana
