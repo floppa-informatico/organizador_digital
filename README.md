@@ -18,3 +18,6 @@ calendario del estudiante dándole la posibilidad de  seleccionar los horarios d
 de los que disponga, como a su vez, sus horarios de sueño, comida, compromisos, hobbys, 
 etc. Con el objetivo de que se pueda saber en qué momentos se les puede asignar una 
 actividad, obteniendo una mejor organización de su tiempo.
+
+Este proyecto para que sea ejecutado, debe tener instalado el módulo de Python "Tkinter",
+también "tkcalendar". Además, solo el archivo "main" es ejecutable.
