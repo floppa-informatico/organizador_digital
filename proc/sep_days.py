@@ -1,14 +1,13 @@
-import sys 
 from proc.verificador import Verificador
 from tkinter import messagebox
-import data.archivos as archivos 
+import data.archivos as archivos
 
 
 # Bloque por definición
-def weekly_time(answer,i):
+def weekly_time(answer, i):
     """
     Esta función se encarga de dejar todas las respuestas relacionadas
-    al tiempo semanal en una sola lista para así poder trabajarlas 
+    al tiempo semanal en una sola lista para así poder trabajarlas
     durante el largo del código. El tiempo es separado en horas y
     minutos, además que queda separado por día.
     """
@@ -36,7 +35,7 @@ def weekly_time(answer,i):
     return answers
 
 
-def daily_time(answer,f):
+def daily_time(answer, f):
     """
     Esta función se encarga de separar las horas de los minutos de los
     tiempos especificados como actividades diarias. Para de esta manera
@@ -71,18 +70,20 @@ def option_1(answer):
         day = []
         # Separa las horas de los minutos según mes o día
         for i in range(6):
-            time_temp = weekly_time(answer,i)
+            time_temp = weekly_time(answer, i)
             days.append(time_temp)
-        for f in range(7,10):
-            time_temp = daily_time(answer,f)
+        for f in range(7, 10):
+            time_temp = daily_time(answer, f)
             day.append(time_temp)
         # Separa los días
         study_days = s_days(answer)
         # Informa al usuario que ha introducido bien los datos
-        messagebox.showinfo("Ha sido un éxito","Has introducido los datos"
+        messagebox.showinfo("Ha sido un éxito", "Has introducido los datos"
                             " correctamente")
-        archivos.escribir_archivo(study_days,day,days)
+        archivos.escribir_archivo(study_days, day, days)
     else:
         # Informa al usuario que no siguió la estructura propuesta.
-        messagebox.showerror("Error","Los datos que introduciste no cumplen"
-                            " la estructura planteada")
+        messagebox.showerror(
+                            "Error",
+                            "Los datos que introduciste no cumplen la"
+                            " estructura planteada")
