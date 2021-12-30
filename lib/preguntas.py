@@ -38,7 +38,10 @@ def interface(ventana_principal):
                             " enviar.\n Una vez que haya respondido todos las"
                             " preguntas, pulsando su respectivo botón, ya"
                             " puede\nvolver al menú pulsando en el botón"
-                            " correspondiente.")
+                            " correspondiente.\nNote que si el numero lleva"
+                            " un cero adelante, debe omitirlo. (ej: escribir"
+                            " las nueve en punto\n de esta manera 9:00, no de"
+                            " esta manera 09:00).")
 
     # Crear etiquetas para preguntas
     pregunta_1 = tk.Label(
