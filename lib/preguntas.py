@@ -32,11 +32,13 @@ def interface(ventana_principal):
                             "aquellas preguntas en donde debe ingresar más de"
                             " un dato, debe ir separado con “;”, sin que esta"
                             "\nquede al final (ejemplo: 9:00-10:00;"
-                            "11:00:12:00 ). Cada vez que responda a una"
-                            " pregunta\npulse el botón de enviar. Una vez que"
-                            " haya respondido todos las preguntas, pulsando"
-                            " su\nrespectivo botón, ya puede volver al menú"
-                            " pulsando en el botón correspondiente.")
+                            "11:00:12:00 ). Además procure que las horas"
+                            " esten en formato\n24 horas. Cada vez que"
+                            " responda a una pregunta pulse el botón de"
+                            " enviar.\n Una vez que haya respondido todos las"
+                            " preguntas, pulsando su respectivo botón, ya"
+                            " puede\nvolver al menú pulsando en el botón"
+                            " correspondiente.")
 
     # Crear etiquetas para preguntas
     pregunta_1 = tk.Label(
