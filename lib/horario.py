@@ -1,8 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-import sys
-sys.path.append("./data/")
-from data import archivos
+import data.archivos as archivos
 
 
 def tabla(ventana_principal):

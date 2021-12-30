@@ -1,12 +1,9 @@
 import tkinter as tk
 from tkinter.ttk import Button, Frame, Label
 from lib.scrollbar import barra_de_desplazamiento
-import sys 
-sys.path.append("./proc/")
-from proc import sep_days
-from tkinter import messagebox
-sys.path.append("./data/")
-from data import archivos
+from proc.sep_days import option_1
+from tkinter import messagebox 
+import data.archivos as archivos
 
 
 def interface(ventana_principal):
@@ -174,7 +171,7 @@ def retornar(ventana_principal,preguntas,todas_las_respuestas):
         # Borra el txt existente
         archivos.borrar_archivo()
         # Pasa todas las respuestas del usuario para ser procesadas
-        sep_days.option_1(todas_las_respuestas)
+        option_1(todas_las_respuestas)
     else:
         messagebox.showwarning("Advertencia","No ha completado todas las "
                                 "preguntas")
