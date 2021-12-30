@@ -1,8 +1,7 @@
 import sys 
 from proc.verificador import Verificador
-from tkinter import messagebox 
-sys.path.append("../data/")
-from data import archivos
+from tkinter import messagebox
+import data.archivos as archivos 
 
 
 def weekly_time(answer,i):
