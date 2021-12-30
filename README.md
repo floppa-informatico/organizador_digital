@@ -20,4 +20,4 @@ etc. Con el objetivo de que se pueda saber en qué momentos se les puede asignar
 actividad, obteniendo una mejor organización de su tiempo.
 
 Este proyecto para que sea ejecutado, debe tener instalado el módulo de Python "Tkinter",
-también "tkcalendar". Además, solo el archivo "main" es ejecutable.
+también "tkcalendar". Además, solo el archivo "main.py" es ejecutable.
