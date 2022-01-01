@@ -1,8 +1,11 @@
 """
-Autores: Grupo 1
+Autores: Sebastián González; Bastián Guerrero; Roberto Galleguillos;
+         Nicolás Chavez; Ignacio Gomez.
+Grupo: 1
 Nombre de proyecto: organizador_digital
 Sección: 0-C-4
 Profesor de Laboratorio: Luis Rios
+Profesor de Cátedra: Leonel Gajardo
 Descripción del Programa: Este programa se estructura en multiples
 archivos en las que cada uno tiene una función especifica. El archivo
 main.py es el archivo principal que se encarga de la interfaz del menu

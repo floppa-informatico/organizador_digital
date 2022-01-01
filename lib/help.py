@@ -20,14 +20,14 @@ def ayuda(ventana_principal):
                 text="Para comenzar, usted debe completar las preguntas que"
                 " se realizará a usted para personalizar toda la \napp"
                 " acorde a sus necesidades. El cual se le pide por favor"
-                " respetar la estructura pedida de lo contario\nle dará"
+                " respetar la estructura pedida, de lo contario\nle dará"
                 " error. Una vez que complete las preguntas usted tendrá"
-                " acceso a su horario, calendario, y\ntambién usted podrá"
+                " acceso a su horario, y calendario.\nTambién usted podrá"
                 " acceder a la sección del “¿como te sientes?” en el que se"
                 " le re acomodará los\nhorarios de estudios en caso de que se"
-                " encuentre estresado, agustiado, entre otros.\n""\n""\n"
-                "Esta app esta pensaba en ser totalmente adaptable a sus"
-                " necesidades, dandole tiempo para también\ntener tiempo para"
+                " encuentre estresado, agustiado, etc.\n""\n""\n"
+                "Esta app esta diseñada para ser totalmente adaptable a sus"
+                " necesidades, dandole tempo para también\ntener tiempo para"
                 " el ocio, descansar, entre otros.")
     # Poner etiqueta en pantalla
     etiqueta.grid(column=1, row=0)
