@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter.constants import END
 from tkinter.ttk import Button, Frame, Label
 from lib.scrollbar import barra_de_desplazamiento
 from proc.sep_days import option_1
@@ -108,47 +109,47 @@ def interface(ventana_principal):
     boton_1 = tk.Button(
                     second_frame,
                     text="Enviar", padx=20, pady=10, command=lambda:
-                    r_1(todas_las_respuestas, respuesta_1))
+                    r_1(todas_las_respuestas, respuesta_1, boton_1))
     boton_2 = tk.Button(
                     second_frame,
                     text="Enviar", padx=20, pady=10, command=lambda:
-                    r_1(todas_las_respuestas, respuesta_2))
+                    r_1(todas_las_respuestas, respuesta_2, boton_2))
     boton_3 = tk.Button(
                     second_frame,
                     text="Enviar", padx=20, pady=10, command=lambda:
-                    r_1(todas_las_respuestas, respuesta_3))
+                    r_1(todas_las_respuestas, respuesta_3, boton_3))
     boton_4 = tk.Button(
                     second_frame,
                     text="Enviar", padx=20, pady=10, command=lambda:
-                    r_1(todas_las_respuestas, respuesta_4))
+                    r_1(todas_las_respuestas, respuesta_4, boton_4))
     boton_5 = tk.Button(
                     second_frame,
                     text="Enviar", padx=20, pady=10, command=lambda:
-                    r_1(todas_las_respuestas, respuesta_5))
+                    r_1(todas_las_respuestas, respuesta_5, boton_5))
     boton_6 = tk.Button(
                     second_frame,
                     text="Enviar", padx=20, pady=10, command=lambda:
-                    r_1(todas_las_respuestas, respuesta_6))
+                    r_1(todas_las_respuestas, respuesta_6, boton_6))
     boton_7 = tk.Button(
                     second_frame,
                     text="Enviar", padx=20, pady=10, command=lambda:
-                    r_1(todas_las_respuestas, respuesta_7))
+                    r_1(todas_las_respuestas, respuesta_7, boton_7))
     boton_8 = tk.Button(
                     second_frame,
                     text="Enviar", padx=20, pady=10, command=lambda:
-                    r_1(todas_las_respuestas, respuesta_8))
+                    r_1(todas_las_respuestas, respuesta_8, boton_8))
     boton_9 = tk.Button(
                     second_frame,
                     text="Enviar", padx=20, pady=10, command=lambda:
-                    r_1(todas_las_respuestas, respuesta_9))
+                    r_1(todas_las_respuestas, respuesta_9, boton_9))
     boton_10 = tk.Button(
                     second_frame,
                     text="Enviar", padx=20, pady=10, command=lambda:
-                    r_1(todas_las_respuestas, respuesta_10))
+                    r_1(todas_las_respuestas, respuesta_10, boton_10))
     boton_11 = tk.Button(
                     second_frame,
                     text="Enviar", padx=20, pady=10, command=lambda:
-                    r_1(todas_las_respuestas, respuesta_11))
+                    r_1(todas_las_respuestas, respuesta_11, boton_11))
 
     # Se usa método grid para poner en pantalla los widgets
     introduccion.grid(row=0, column=0)
@@ -235,7 +236,7 @@ def retornar(ventana_principal, preguntas, todas_las_respuestas):
                             "No ha completado todas las preguntas")
 
 
-def r_1(todas_las_respuestas, respuesta):
+def r_1(todas_las_respuestas, respuesta, boton):
     """
     Esta funcion se encarga se obtener todas las respuestas y poder
     pasarlo de un tipo de dato propio de tkinter a un string, además
@@ -260,4 +261,6 @@ def r_1(todas_las_respuestas, respuesta):
         # Si cumple, se agrega a la lista y se retorna a la funcion
         # interface
         todas_las_respuestas.append(elemento)
+        # Elimina el boton
+        boton.destroy()
         return todas_las_respuestas

@@ -32,16 +32,17 @@ def Sientes(ventana_principal):
         # Entrada para introducir texto
         respuesta_0 = tk.Entry(sentir_ventana)
 
+        respuesta = []
         # Se crea boton
-        boton_11 = tk.Button(
+        boton_0 = tk.Button(
                     sentir_ventana,
                     text="Enviar", padx=20, pady=10,
-                    command=lambda: r_1(respuesta_0))
+                    command=lambda: r_1(respuesta_0, boton_0, respuesta))
 
         # Poner los widgets en pantalla
         pregunta_0.grid(column=0, row=0)
         respuesta_0.grid(column=0, row=1)
-        boton_11.grid(column=0, row=2)
+        boton_0.grid(column=0, row=2)
 
         # Boton para volver
         for i_para_etiqueta in range(1, 3):
@@ -56,7 +57,7 @@ def Sientes(ventana_principal):
                             retornar(
                                 ventana_principal,
                                 sentir_ventana,
-                                respuesta_0
+                                respuesta
                                 )
                             )
         boton_volver.grid(row=5, column=1)
@@ -70,6 +71,8 @@ def retornar(ventana_principal, sentir_ventana, respuesta):
     Esta funcion tiene el propósito de cerrar la subventana
     y volver al menu.
     """
+    # Se transforma de lista a string
+    respuesta = respuesta[0]
     # Verifica si la respuesta del usuario es la respuesta que se pide
     final = False
     if respuesta.lower() == "bien" or respuesta.lower() == "mal":
@@ -92,7 +95,7 @@ def retornar(ventana_principal, sentir_ventana, respuesta):
                             " estructura planteada")
 
 
-def r_1(respuesta):
+def r_1(respuesta, boton, lista):
     """
     Esta funcion se encarga se obtener la respuesta y poder
     pasarlo de un tipo de dato propio de tkinter a un string, además
@@ -112,5 +115,10 @@ def r_1(respuesta):
     elif elemento[0] == " " and elemento[1] != " ":
         messagebox.showerror("Error", "¡Hay un espacio al inicio!")
     else:
+        # Si cumple, se agrega a la lista y se retorna a la funcion
+        # interface
+        lista.append(elemento)
+        # Elimina el boton
+        boton.destroy()
         # Si cumple, se retorna el elemento a la función retornar
         return respuesta
