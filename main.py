@@ -34,8 +34,9 @@ from lib.help import ayuda
 from lib.sientes import Sientes
 from data.archivos import borrar_archivo
 
-
 # Bloque por definición
+
+
 def principal():
     """
     Esta función se encarga de la interfaz grafica del menú principal.
@@ -84,6 +85,8 @@ def principal():
 
 
 # Bloque principal
+
+
 # Creamos la ventana
 menu_principal = tk.Tk()
 # Dimensión de ventana

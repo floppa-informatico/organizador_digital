@@ -2,8 +2,9 @@ import tkinter as tk
 from tkinter.constants import BOTH, LEFT, RIGHT, VERTICAL, Y
 from tkinter import ttk
 
-
 # Bloque por definición
+
+
 def barra_de_desplazamiento(preguntas):
     """
     Esta función se encarga de crear una barra de desplazamiento

@@ -1,7 +1,8 @@
 import tkinter as tk
 
-
 # Bloque por definición
+
+
 def ayuda(ventana_principal):
     """
     Esta función es la encargada de crear la subventana de la sección
@@ -10,10 +11,12 @@ def ayuda(ventana_principal):
     siendo este dato propio de tkinter.
     """
     # Crear subventana
+    # Procesamiento
     ventana_ayuda = tk.Toplevel(ventana_principal)
     # Crear titulo
     ventana_ayuda.title("organizador_digital")
 
+    # Salida
     # Crear etiqueta para información de ayuda
     etiqueta = tk.Label(
                 ventana_ayuda,

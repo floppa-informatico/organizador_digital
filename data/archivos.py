@@ -1,4 +1,9 @@
+from tkinter import messagebox
+
+
 # Bloque por definición
+
+
 def escribir_archivo(study_days, day, days):
     """
     Esta función se encarga una vez trabajado los datos para poder
@@ -23,6 +28,7 @@ def borrar_archivo():
     """
     with open("./data/datos.txt", "w") as archivo:
         archivo.write("")
+    messagebox.showinfo("Se ha completado", "¡Se ha borrado la información éxito!")
 
 
 def leer_archivo_1():

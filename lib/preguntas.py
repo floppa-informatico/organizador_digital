@@ -6,8 +6,9 @@ from proc.sep_days import option_1
 from tkinter import messagebox
 import data.archivos as archivos
 
-
 # Bloque por definición
+
+
 def interface(ventana_principal):
     """
     Esta función tiene la función de mostar la ventana de las preguntas
@@ -45,6 +46,7 @@ def interface(ventana_principal):
                             " esta manera 09:00).")
 
     # Crear etiquetas para preguntas
+    # Entrada
     pregunta_1 = tk.Label(
                     second_frame,
                     text="    Para comenzar, ingrese su horario de clases del"
@@ -91,6 +93,7 @@ def interface(ventana_principal):
                     second_frame,
                     text="¿Como te has sentido? (Escriba bien o mal)")
 
+    # Procesamiento
     # Entrada para introducir texto
     respuesta_1 = tk.Entry(second_frame)
     respuesta_2 = tk.Entry(second_frame)

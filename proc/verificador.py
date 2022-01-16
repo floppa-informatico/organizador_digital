@@ -1,4 +1,6 @@
 # Bloque por definición
+
+
 def Verificador(answer):
     """
     Esta funcion tiene el proposito de verificar segun cuatro criterios

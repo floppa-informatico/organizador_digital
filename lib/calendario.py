@@ -5,8 +5,9 @@ import tkcalendar as calendar
 import datetime
 from lib.preguntas import retornar
 
-
 # Bloque por definición
+
+
 def Calendario(ventana_principal):
     """
     Esta función es la encargada de crear la subventana para el

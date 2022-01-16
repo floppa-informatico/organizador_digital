@@ -2,8 +2,9 @@ import tkinter as tk
 from tkinter import messagebox
 import data.archivos as archivos
 
-
 # Bloque por definición
+
+
 def Sientes(ventana_principal):
     """
     Esta función es la encargada de crear la subventana para la

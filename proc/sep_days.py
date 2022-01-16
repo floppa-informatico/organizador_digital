@@ -2,8 +2,9 @@ from proc.verificador import Verificador
 from tkinter import messagebox
 import data.archivos as archivos
 
-
 # Bloque por definición
+
+
 def weekly_time(answer, i):
     """
     Esta función se encarga de dejar todas las respuestas relacionadas
@@ -156,6 +157,7 @@ def option_1(answer):
     de manera interna pueda hacer el horario para el usuario totalmente
     adapto a él. El usuario podra ver el horario en la opción 2.
     """
+    # Procesamiento de datos
     if Verificador(answer):
         days = []
         day = []
