@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import messagebox
 import data.archivos as archivos
+import os
+import data.escribir_xlsx as escribir
 
 # Bloque por definición
 
@@ -13,10 +15,10 @@ def Sientes(ventana_principal):
     este un dato propio de tkinter.
     """
     # Leer txt para comprobar que el archivo tenga datos o no
-    lista_comprobacion = archivos.leer_archivo_2()
-    if lista_comprobacion == []:
+    if not(os.path.exists("./data/datos.txt")
+           and os.path.exists("./data/datos.xlsx")):
         messagebox.showerror(
-                        "Error", "¡Primero debes completar las preguntas!")
+            "Error", "¡Primero debes completar las preguntas!")
     else:
         # Se declara la variable respuesta_0 en caso de que el usuario no
         # escriba nada
@@ -27,99 +29,104 @@ def Sientes(ventana_principal):
 
         # Crear etiqueta para pregunta
         pregunta_0 = tk.Label(
-                            sentir_ventana,
-                            text="¿Como te has sentido? (Escriba bien o mal)")
+            sentir_ventana,
+            text="¿Como te has sentido? (Escriba bien o mal)")
 
         # Entrada para introducir texto
         respuesta_0 = tk.Entry(sentir_ventana)
 
-        respuesta = []
-        # Se crea boton
-        boton_0 = tk.Button(
-                    sentir_ventana,
-                    text="Enviar", padx=20, pady=10,
-                    command=lambda: r_1(respuesta_0, boton_0, respuesta))
-
         # Poner los widgets en pantalla
         pregunta_0.grid(column=0, row=0)
         respuesta_0.grid(column=0, row=1)
-        boton_0.grid(column=0, row=2)
 
         # Boton para volver
         for i_para_etiqueta in range(1, 3):
             etiqueta_vacia = tk.Label(sentir_ventana, text="").grid(
-                            row=i_para_etiqueta + 2, column=1)
+                row=i_para_etiqueta + 2, column=1)
 
         boton_volver = tk.Button(
-                            sentir_ventana,
-                            text="Volver al menú",
-                            padx=20, pady=10,
-                            command=lambda:
-                            retornar(
-                                ventana_principal,
-                                sentir_ventana,
-                                respuesta
-                                )
-                            )
+            sentir_ventana,
+            text="Volver al menú",
+            padx=20, pady=10,
+            command=lambda:
+            retornar(
+                ventana_principal,
+                sentir_ventana,
+                respuesta_0
+            )
+        )
         boton_volver.grid(row=5, column=1)
 
         # Cerrar ventana principal
         ventana_principal.withdraw()
 
 
-def retornar(ventana_principal, sentir_ventana, respuesta):
+def retornar(ventana_principal, sentir_ventana, respuesta_0):
     """
     Esta funcion tiene el propósito de cerrar la subventana
     y volver al menu.
     """
-    # Se transforma de lista a string
-    respuesta = respuesta[0]
+    respuesta = respuesta_0.get()
     # Verifica si la respuesta del usuario es la respuesta que se pide
     final = False
     if respuesta.lower() == "bien" or respuesta.lower() == "mal":
         final = True
-    # Vuelve a abrir la ventana principal
-    ventana_principal.deiconify()
-    # Cierra la subventana
-    sentir_ventana.destroy()
 
     if final:
         # Si es "bien" o "mal", entonces la introduccion de datos ha
         # sido exitoso.
         messagebox.showinfo("Ha sido un éxito", "Has introducido el dato"
                             " correctamente")
+        # Se escribe la nueva respuesta
+        with open("./data/datos.txt", "r") as archivo:
+            respuestas = []
+            for linea in archivo:
+                respuesta.append(linea)
+            # Dejar todas las lineas en su respectiva variable
+            dias_especificos = eval(respuestas[0])
+            dias_con_horas = eval(respuestas[1])
+            semana_horario = eval(respuestas[-2])
+            estado_animico = respuesta
+        with open("./data/datos.txt", "w") as archivo:
+            archivo.write(dias_especificos)
+            archivo.write("\n")
+            archivo.write(dias_con_horas)
+            archivo.write("\n")
+            archivo.write(semana_horario)
+            archivo.write("\n")
+            archivo.write(estado_animico)
+        # Se ajusta el horario
+        escribir.xlsxwriter()
+
+        # Vuelve a abrir la ventana principal
+        ventana_principal.deiconify()
+        # Cierra la subventana
+        sentir_ventana.destroy()
     else:
         # Informa al usuario que no siguió la estructura propuesta.
-        messagebox.showwarning(
-                            "Advertencia",
-                            "No ha completado la pregunta o no seguiste la"
-                            " estructura planteada")
-
-
-def r_1(respuesta, boton, lista):
-    """
-    Esta funcion se encarga se obtener la respuesta y poder
-    pasarlo de un tipo de dato propio de tkinter a un string, además
-    de un primer filtro si es que el dato corresponde a la estructura
-    que se pide.
-    Esta función tiene como entrada la respuesta al widget "Entry"
-    llamada "respuesta" como parametro formal. Esta función tiene como
-    salida el elemento siendo este de tipo string, en donde se retorna
-    el elemento si es que cumple con lo ya mencionado.
-    """
-    # Se obtiene la respuesta y lo pasa a string
-    elemento = respuesta.get()
-    # Clasifica si es que lo que ingresó el usuario corresponde en una
-    # primera instancia a lo pedido
-    if elemento == "" or elemento == " ":
-        messagebox.showerror("Error", "¡Es espacio está vacío!")
-    elif elemento[0] == " " and elemento[1] != " ":
-        messagebox.showerror("Error", "¡Hay un espacio al inicio!")
-    else:
-        # Si cumple, se agrega a la lista y se retorna a la funcion
-        # interface
-        lista.append(elemento)
-        # Elimina el boton
-        boton.destroy()
-        # Si cumple, se retorna el elemento a la función retornar
-        return respuesta
+        if respuesta == "":
+            respuesta = messagebox.askquestion(
+                "Advertencia",
+                "No ha completado la pregunta, ¿Quieres salir?")
+            if respuesta == "yes":
+                # Vuelve a abrir la ventana principal
+                ventana_principal.deiconify()
+                # Cierra la subventana
+                sentir_ventana.destroy()
+        elif respuesta[0] == " ":
+            messagebox.showerror(
+                "Error",
+                "¡Hay un espacio al inicio en la respuesta!")
+            if respuesta[-1] == " ":
+                messagebox.showerror(
+                    "Error",
+                    "¡Hay un espacio al final en la respuesta!")
+        elif respuesta[-1] == " ":
+            messagebox.showerror(
+                "Error",
+                "¡Hay un espacio al final en la respuesta!")
+        else:
+            messagebox.showerror(
+                "Error",
+                "No escribiste una respuesta"
+                " acorde a la pregunta :(")

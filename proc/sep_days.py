@@ -1,6 +1,7 @@
 from proc.verificador import Verificador
 from tkinter import messagebox
 import data.archivos as archivos
+import data.escribir_xlsx as xlsx
 
 # Bloque por definición
 
@@ -158,6 +159,9 @@ def option_1(answer):
     adapto a él. El usuario podra ver el horario en la opción 2.
     """
     # Procesamiento de datos
+
+    # Se inicia un contador de errores
+    contador_de_errores = 0
     if Verificador(answer):
         days = []
         day = []
@@ -171,22 +175,32 @@ def option_1(answer):
             time_temp = daily_time(answer, f)
             day.append(time_temp)
         horas_24_day = horas_24_dia(day)
+        # Respuesta de estado anímico
+        sientes = answer[10]
         # Separa los días
         study_days = s_days(answer)
         # Informa al usuario que ha introducido bien los datos
         if horas_24_day and horas_24_days:
             messagebox.showinfo(
-                            "Ha sido un éxito",
-                            "Has introducido los datos correctamente")
-            archivos.escribir_archivo(study_days, day, days)
+                "Ha sido un éxito",
+                "Has introducido los datos correctamente,"
+                " ¡Ya puedes ver tu horario! :D")
+            # Se escribe los datos en un archivo .txt
+            archivos.escribir_archivo(study_days, day, days, sientes)
+            # Finalmente los datos del archivo .txt se escribe en un
+            # .xlsx
+            xlsx.escribir_xlsx()
         else:
             messagebox.showerror(
-                            "Error",
-                            "Las horas ingresadas no cumplen con el formato"
-                            " 24 horas")
+                "Error",
+                "Las horas ingresadas no cumplen con el formato"
+                " 24 horas")
+            contador_de_errores += 1
     else:
         # Informa al usuario que no siguió la estructura propuesta.
         messagebox.showerror(
-                            "Error",
-                            "Los datos que introduciste no cumplen la"
-                            " estructura planteada")
+            "Error",
+            "Los datos que introduciste no cumplen la"
+            " estructura planteada")
+        contador_de_errores += 1
+    return contador_de_errores

@@ -25,16 +25,16 @@ def barra_de_desplazamiento(preguntas):
 
     # Agregar Scrollbar al Canvas
     my_scrollbar = ttk.Scrollbar(
-                            main_frame, orient=VERTICAL,
-                            command=canvas_1.yview)
+        main_frame, orient=VERTICAL,
+        command=canvas_1.yview)
     my_scrollbar.pack(side=RIGHT, fill=Y)
 
     # Configurar el Canvas para tener el scrollbar
     canvas_1.configure(yscrollcommand=my_scrollbar.set)
     canvas_1.bind(
-            "<Configure>",
-            lambda e: canvas_1.configure(
-                                        scrollregion=canvas_1.bbox("all")))
+        "<Configure>",
+        lambda e: canvas_1.configure(
+            scrollregion=canvas_1.bbox("all")))
 
     # Crear otro Frame dentro del Canvas
     second_frame = tk.Frame(canvas_1)

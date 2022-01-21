@@ -1,6 +1,7 @@
 import tkinter as tk
-from tkinter import messagebox
-import data.archivos as archivos
+from tkinter import messagebox, ttk
+import os
+import pandas as pd
 
 # Bloque por definición
 
@@ -13,30 +14,52 @@ def tabla(ventana_principal):
     este un dato propio de tkinter.
     """
     # Leer txt para comprobar que el archivo tenga datos o no
-    lista_comprobacion = archivos.leer_archivo_2()
-    if lista_comprobacion == []:
+    if not(os.path.exists("./data/datos.txt")
+           and os.path.exists("./data/datos.xlsx")):
         messagebox.showerror(
-                        "Error", "¡Primero debes completar las preguntas!")
+            "Error", "¡Primero debes completar las preguntas!")
     else:
-        # Leer txt
-        study_days, day, days = archivos.leer_archivo_1()
         # Crear subventana
         organizacion = tk.Toplevel(ventana_principal)
         # Crear titulo
         organizacion.title("organizador_digital")
 
-        # Transformar a lista para poder trabajar
-        study_days = eval(study_days)
-        day = eval(day)
-        days = eval(days)
+        # Creamos un frame donde se pondrán todos los widgets.
+        marco = tk.Frame(organizacion)
+        marco.grid(row=1, column=0, pady=20)
+        # Creamos el treeview en donde se pondrán los datos del .xlsx
+        arbol = ttk.Treeview(marco)
+        # Leemos datos.xlsx
+        df = pd.read_excel("./data/datos.xlsx")
+        # Se elimina el treeview antiguo en caso de existir
+        arbol.delete(*arbol.get_children())
+        # Se imprime en la ventana el nuevo treeview
+        arbol["column"] = list(df.columns)
+        arbol["show"] = "headings"
+        # Se recorre la lista de columnas de encabezado
+        for columna in arbol["column"]:
+            arbol.heading(columna, text=columna)
+
+        # Poner los datos en el treeview
+        df_filas = df.to_numpy().tolist()
+        for fila in df_filas:
+            arbol.insert("", "end", values=fila)
+
+        # Se pone el treeview en pantalla
+        arbol.pack()
 
         # Boton para volver
         boton_volver = tk.Button(
-                            organizacion,
-                            text="Volver al menú", padx=20, pady=10,
-                            command=lambda:
-                            retornar(ventana_principal, organizacion))
-        boton_volver.grid(row=0, column=0)
+            organizacion,
+            text="Volver al menú", padx=20, pady=10,
+            command=lambda:
+            retornar(ventana_principal, organizacion))
+
+        for i_para_etiqueta in range(1, 3):
+            etiqueta_vacia = tk.Label(organizacion, text="").grid(
+                row=i_para_etiqueta + 22, column=0)
+
+        boton_volver.grid(row=4, column=1, pady=20)
 
         # Cerrar ventana principal
         ventana_principal.withdraw()

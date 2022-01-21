@@ -34,7 +34,7 @@ from lib.help import ayuda
 from lib.sientes import Sientes
 from data.archivos import borrar_archivo
 
-# Bloque por definición
+# Bloque de definición
 
 
 def principal():
@@ -44,36 +44,42 @@ def principal():
     """
     # Etiqueta
     presentacion_etiqueta = tk.Label(
-                            menu_principal,
-                            text="Bienvenid@ a Organizador digital, nos"
-                            " adaptamos rápidamente a ti :D!\n ¿Qué desea "
-                            "hacer?")
+        menu_principal,
+        text="Bienvenid@ a Organizador digital, nos"
+        " adaptamos rápidamente a ti :D!\n ¿Qué desea "
+        "hacer?")
 
     # Se posiciona la etiqueta usando grid
     presentacion_etiqueta.grid(row=0, column=0, columnspan=10)
 
     # Botones
+    # Para la función de borrar datos se indica de que archivo se está
+    # invocando la función
+    archivo = "principal"
+
     preguntas_boton = tk.Button(menu_principal, text="Comenzar o volver \n"
                                 " a responder las \n preguntas", padx=12,
                                 pady=12, command=lambda:
                                 interface(menu_principal))
     verhorario_boton = tk.Button(
-                            menu_principal, text="Ver mi horario", padx=12,
-                            pady=12, command=lambda: tabla(menu_principal))
+        menu_principal, text="Ver mi horario", padx=12,
+        pady=12, command=lambda: tabla(menu_principal))
     sientes_boton = tk.Button(
-                            menu_principal, text="¿Cómo te sientes?", padx=12,
-                            pady=12, command=lambda: Sientes(menu_principal))
+        menu_principal, text="¿Cómo te sientes?", padx=12,
+        pady=12, command=lambda: Sientes(menu_principal))
     uso_boton = tk.Button(
-                        menu_principal,
-                        text="¿Cómo se usa \n esta aplicación?", padx=12,
-                        pady=12, command=lambda: ayuda(menu_principal))
+        menu_principal,
+        text="¿Cómo se usa \n esta aplicación?", padx=12,
+        pady=12, command=lambda: ayuda(menu_principal))
     calendario_boton = tk.Button(
-                            menu_principal,
-                            text="Ver mi calendario", padx=12, pady=12,
-                            command=lambda: Calendario(menu_principal))
+        menu_principal,
+        text="Ver mi calendario", padx=12, pady=12,
+        command=lambda: Calendario(menu_principal))
     borrar_datos_boton = tk.Button(
-                                menu_principal, text="Borrar datos", padx=12,
-                                pady=12, command=lambda: borrar_archivo())
+        menu_principal, text="Borrar mis datos",
+        padx=12,
+        pady=12,
+        command=lambda: borrar_archivo(archivo))
 
     # Se usa grid para botones
     preguntas_boton.grid(row=3, column=2)
@@ -87,15 +93,13 @@ def principal():
 # Bloque principal
 
 
-# Creamos la ventana
-menu_principal = tk.Tk()
-# Dimensión de ventana
-menu_principal.title("organizador_digital")
-
-# Invocamos la función encargada de la interfaz
 if __name__ == "__main__":
+    # Creamos la ventana
+    menu_principal = tk.Tk()
+    # Dimensión de ventana
+    menu_principal.title("organizador_digital")
+    # Invocamos la función encargada de la interfaz
     principal()
-
-# Muestra todo en pantalla y responde a la entrada del usuario hasta
-# que el programa se termina
-menu_principal.mainloop()
+    # Muestra todo en pantalla y responde a la entrada del usuario hasta
+    # que el programa se termina (Propio de tkinter)
+    menu_principal.mainloop()

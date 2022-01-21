@@ -40,7 +40,7 @@ def Verificador(answer):
             answer[j][0].lower() == "v" or
             answer[j][0].lower() == "s" or
             answer[j][0].lower() == "d"
-                ):
+        ):
             cuarto = dias_independientes(answer, j, cuarto)
         else:
             i = 0
@@ -52,15 +52,15 @@ def Verificador(answer):
                         # Pasa la lista, j, y las variables de los criterios
                         # a la funcion contador.
                         primero, segundo, tercero = contador(
-                                                            answer, j,
-                                                            primero,
-                                                            segundo, tercero)
+                            answer, j,
+                            primero,
+                            segundo, tercero)
                         k += 1
                 elif answer[j].count(";") == 0:
                     primero, segundo, tercero = contador(
-                                                        answer, j,
-                                                        primero,
-                                                        segundo, tercero)
+                        answer, j,
+                        primero,
+                        segundo, tercero)
                 i += 1
     # Realiza una operacion "and" para verificar que en su conjunto las
     # respuestas cumplen con los criterios
@@ -144,14 +144,14 @@ def dias_independientes(answer, j, cuarto):
         answer[j] = answer[j] + ";" + answer[j]
         temp_0 = answer[j].split(";")
     dias = [
-            "lunes",
-            "martes",
-            "miercoles",
-            "jueves",
-            "viernes",
-            "sabado",
-            "domingo"
-            ]
+        "lunes",
+        "martes",
+        "miercoles",
+        "jueves",
+        "viernes",
+        "sabado",
+        "domingo"
+    ]
     contador = 0
     for k in range(len(temp_0)):
         acumulador = False
