@@ -64,16 +64,29 @@ def Calendario(ventana_principal):
 
         # Crear calendario
         mindate = datetime.date(year=year, month=mes, day=dia)
-        cal = calendar.Calendar(marco, selectmode="day", mindate=mindate, year=year,
-                                mouth=mes, day=dia)
+        cal = calendar.Calendar(
+            marco,
+            selectmode="day",
+            mindate=mindate,
+            year=year,
+            mouth=mes,
+            day=dia)
         cal.pack(fill="both", expand=True)
 
         # Se ponen los eventos guardados del calendario
         lista_iterador = escribir_eventos(cal, calendari0)
 
         # Se envia respuesta al pulsar enter
-        respuesta.bind("<Return>", lambda event, calendari0=calendari0: guarda_datos_calendario(
-            event, calendari0, cal, respuesta_1, lista_iterador))
+        respuesta.bind(
+            "<Return>",
+            lambda event,
+            calendari0=calendari0:
+            guarda_datos_calendario(
+                event,
+                calendari0,
+                cal, respuesta_1,
+                lista_iterador)
+        )
 
         # Boton para volver
         boton_volver = tk.Button(
@@ -104,7 +117,12 @@ def retornar(ventana_principal, calendar):
     calendar.destroy()
 
 
-def guarda_datos_calendario(event, calendari0, cal, respuesta_1, lista_iterador):
+def guarda_datos_calendario(
+        event,
+        calendari0,
+        cal,
+        respuesta_1,
+        lista_iterador):
     """
     Esta función se encarga de cuando el usuario introduza el nombre
     para el evento, guarde el nombre y la fecha seleccionada para de
@@ -132,7 +150,7 @@ def guarda_datos_calendario(event, calendari0, cal, respuesta_1, lista_iterador)
 def escribir_nuevo_evento(cal, calendari0, respuesta, lista_iterador, linea):
     """
     Esta función se encarga de escribir el nuevo evento introducido por
-    el usuario en el calendario. 
+    el usuario en el calendario.
     Esta función tiene como entrada cal y calendari0 siendo estos de
     tipo de dato propio de tkinter, respuesta siendo de tipo string,
     lista_iterador siendo de tipo list, y linea siendo tipo string.
@@ -162,8 +180,17 @@ def escribir_nuevo_evento(cal, calendari0, respuesta, lista_iterador, linea):
     # Se crea boton y etiqueta
     dias = tk.Label(calendari0, text=display)
     dias.grid(row=3+indice, column=0)
-    eliminar = tk.Button(calendari0, text="x", command=lambda: eliminar_evento_reciente(
-        dias, eliminar, evento_nombre, cal, linea))
+    eliminar = tk.Button(
+        calendari0,
+        text="x",
+        command=lambda:
+        eliminar_evento_reciente(
+            dias,
+            eliminar,
+            evento_nombre,
+            cal,
+            linea)
+    )
     eliminar.grid(row=3+indice, column=1)
 
 
@@ -257,8 +284,17 @@ def escribir_eventos(cal, calendari0):
             today = date.today()
             # Se pone en pantalla cuantas horas faltan para
             # x dia puesto como evento
-            dias_faltantes(linea_0[0], fecha, today,
-                           iterador, evento_nombre, lineas, linea, archivo, calendari0, cal)
+            dias_faltantes(
+                linea_0[0],
+                fecha,
+                today,
+                iterador,
+                evento_nombre,
+                lineas,
+                linea,
+                archivo,
+                calendari0,
+                cal)
             # Se marca con color rojo el dia pedido
             cal.tag_config(f"evento_{iterador}",
                            background="red", foreground="yellow")
@@ -269,7 +305,17 @@ def escribir_eventos(cal, calendari0):
         return lista_iterador
 
 
-def dias_faltantes(evento, d1, d2, iterador, evento_nombre, lineas, linea, archivo, calendari0, cal):
+def dias_faltantes(
+        evento,
+        d1,
+        d2,
+        iterador,
+        evento_nombre,
+        lineas,
+        linea,
+        archivo,
+        calendari0,
+        cal):
     """
     Esta función tiene el propósito de escribir las etiquetas que
     visualizará el usario para saber los días faltantes para un
@@ -294,7 +340,14 @@ def dias_faltantes(evento, d1, d2, iterador, evento_nombre, lineas, linea, archi
     eliminar.grid(row=3+iterador, column=1)
 
 
-def eliminar_evento(dias, eliminar, evento_nombre, lineas, linea, archivo, cal):
+def eliminar_evento(
+        dias,
+        eliminar,
+        evento_nombre,
+        lineas,
+        linea,
+        archivo,
+        cal):
     """
     Esta función es invocada si el usuario pulsa el botón de eliminar
     un determinado evento.

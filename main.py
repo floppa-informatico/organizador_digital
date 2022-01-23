@@ -26,7 +26,7 @@ Como requisito previo debe tener instalado python en su dispositivo
 terminal.
 Para comenzar pulse la tecla windows, seguido de esto escriba cmd y
 pulse en la opción donde dice Símbolo del Sistema (asumiendo que tiene
-el idioma español configurado en su sistema operativo). 
+el idioma español configurado en su sistema operativo).
 Luego de esto escriba los siguientes comandos (en orden):
 
 pip install tkinter

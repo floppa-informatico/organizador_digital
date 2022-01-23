@@ -1,7 +1,6 @@
 # Bloque de importaciones
 import xlsxwriter
 import proc.orden_horario as horario
-#import orden_horario as horario
 
 # Bloque de definiciones
 # Bloque de definición de funciones
@@ -350,6 +349,3 @@ def escribir_xlsx():
             horas_con_formato[horas][0] + " - " + horas_con_formato[horas][1])
     # Cierra el archivo .xlsx
     archivo.close()
-
-
-escribir_xlsx()

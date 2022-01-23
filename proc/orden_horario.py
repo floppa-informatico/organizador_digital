@@ -239,7 +239,7 @@ def orden():
 
     comprobar = horas_horario
     for clases in range(len(semana_horario)):
-        for hora in range(0,int(len(semana_horario[clases])),2):
+        for hora in range(0, int(len(semana_horario[clases])), 2):
             elemento_anterior = int(semana_horario[clases][hora])
 
             # Se suma la hora anterior con el correspondiente
@@ -249,7 +249,9 @@ def orden():
             comprobar.append(elemento_anterior)
             comprobar.append(elemento_siguiente)
             comprobar.sort()
-            for clase in comprobar[comprobar.index(elemento_anterior):comprobar.index(elemento_siguiente)]:
+            for clase in comprobar[
+                    comprobar.index(elemento_anterior):
+                    comprobar.index(elemento_siguiente)]:
                 semana_horario[clases].append(clase)
     semana_horario = eliminar_repetidos_lista_de_listas(semana_horario)
 
@@ -280,7 +282,9 @@ def orden():
             comprobar.append(hora_ocio)
             comprobar.append(elemento_anterior)
             comprobar.sort()
-            for ocio_i in comprobar[comprobar.index(elemento_anterior):comprobar.index(hora_ocio)]:
+            for ocio_i in comprobar[
+                    comprobar.index(elemento_anterior):
+                    comprobar.index(hora_ocio)]:
                 semana_horario[ocio].append(ocio_i)
 
     # Se obtienen las horas de ocio por separado para usarlo en
@@ -327,15 +331,19 @@ def orden():
                         semana_horario[dias_estudio].sort()
                         elemento_anterior = int(
                             semana_horario[dias_estudio][-1])
-                        # Se agregan estos dos anteriores a la lista semana_horario
+                        # Se agregan estos dos anteriores a la lista
+                        # semana_horario
                         hora = int(
-                            semana_horario[dias_estudio][-1]) + int(hora_estudio)
+                            semana_horario[dias_estudio][-1]) + \
+                            int(hora_estudio)
                         semana_horario[dias_estudio].append(hora)
                         # Se agregan las horas que están entre estas
                         comprobar.append(hora)
                         comprobar.append(elemento_anterior)
                         comprobar.sort()
-                        for estudio in comprobar[comprobar.index(elemento_anterior):comprobar.index(hora)]:
+                        for estudio in comprobar[
+                                comprobar.index(elemento_anterior):
+                                comprobar.index(hora)]:
                             semana_horario[dias_estudio].append(estudio)
                     lista_estudio = []
             # Si se ha dividido antes el tiempo
@@ -347,15 +355,19 @@ def orden():
                         if estudio % 2 == 0:
                             if dias_con_horas[0][estudio] >= 40:
                                 # Divide el tiempo de estudios en dos.
-                                nuevo_tiempo_0 = dias_con_horas[0][estudio] / 2
+                                nuevo_tiempo_0 = dias_con_horas[0][estudio] \
+                                    / 2
                                 nuevo_tiempo_1 = round(nuevo_tiempo_0)
 
-                                # Hace una proporcion de 1:5 usada en técnica pomodoro
-                                # Al ser dos tiempos iguales, solo se ocupará uno para
+                                # Hace una proporcion de 1:5 usada en
+                                # técnica pomodoro
+                                # Al ser dos tiempos iguales, solo se
+                                # ocupará uno para
                                 # determinar los tiempos de descanso.
                                 tiempo_de_descanso = round(
                                     (nuevo_tiempo_1 * 1) / 5)
-                                # Se agrega este nuevo tiempo de estudio a lista_estudio
+                                # Se agrega este nuevo tiempo de
+                                # estudio a lista_estudio
                                 lista_estudio.append(int(nuevo_tiempo_0))
                                 lista_estudio.append(int(tiempo_de_descanso))
                                 lista_estudio.append(int(nuevo_tiempo_1))
@@ -367,17 +379,22 @@ def orden():
                         semana_horario[dias_estudio].sort()
                         elemento_anterior = int(
                             semana_horario[dias_estudio][-1])
-                        # Se agregan estos dos anteriores a la lista semana_horario
+                        # Se agregan estos dos anteriores a la lista
+                        # semana_horario
                         hora = int(
-                            semana_horario[dias_estudio][-1]) + int(hora_estudio)
+                            semana_horario[dias_estudio][-1]) + \
+                            int(hora_estudio)
                         semana_horario[dias_estudio].append(hora)
                         # Se agregan las horas que están entre estas
                         comprobar.append(hora)
                         comprobar.append(elemento_anterior)
                         comprobar.sort()
-                        # Se recorre la lista comprobar para agregar todos los tiempos
-                        # que esta entre los tiempos de estudio a la lista
-                        for estudio in comprobar[comprobar.index(elemento_anterior):comprobar.index(hora)]:
+                        # Se recorre la lista comprobar para agregar
+                        # todos los tiempos que esta entre los tiempos
+                        # de estudio a la lista
+                        for estudio in comprobar[
+                                comprobar.index(elemento_anterior):
+                                comprobar.index(hora)]:
                             semana_horario[dias_estudio].append(estudio)
                     lista_estudio = []
 
@@ -393,7 +410,9 @@ def orden():
                 comprobar.sort()
                 # Se recorre la lista comprobar para agregar todos los tiempos
                 # que esta entre los tiempos de estudio a la lista
-                for estudio in comprobar[comprobar.index(elemento_anterior):comprobar.index(hora_0)]:
+                for estudio in comprobar[
+                        comprobar.index(elemento_anterior):
+                        comprobar.index(hora_0)]:
                     semana_horario[dias_estudio].append(estudio)
     # Se agrega este nuevo tiempo de estudio a
     # lista_estudio
@@ -432,7 +451,8 @@ def orden():
         for hora in semana_horario[dia]:
             # Si la hora no se encuentra dentro de semana_solo_horario
             # es por que es la hora de estudio.
-            if hora not in lista_horas_clases[dia] and hora not in lista_horas_ocio[dia]:
+            if hora not in lista_horas_clases[dia] and \
+                    hora not in lista_horas_ocio[dia]:
                 lista_temporal.append(hora)
         # Se agrega la hora anterior a la lista
         if dia in indice_dias_estudio:
@@ -500,7 +520,8 @@ def orden():
     for rango_hora in range(len(horas_horario)):
         for hora in range(len(horas_horario[rango_hora])):
             hora_entera = str(int(
-                (horas_horario[rango_hora][hora] / 60) - ((horas_horario[rango_hora][hora] % 60) / 60)))
+                (horas_horario[rango_hora][hora] / 60) -
+                ((horas_horario[rango_hora][hora] % 60) / 60)))
             minutos = str(horas_horario[rango_hora][hora] % 60)
             if minutos == "0":
                 hora_completa = hora_entera + ":" + minutos + "0"

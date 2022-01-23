@@ -249,19 +249,23 @@ def retornar(
             elemento = todas_las_respuestas[i]
             if elemento == "" or elemento == " ":
                 messagebox.showerror(
-                    "Error", f"¡El espacio está vacío en la pregunta {i + 1}!")
+                    "Error",
+                    f"¡El espacio está vacío en la pregunta {i + 1}!")
                 contador_de_errores += 1
             elif elemento[0] == " ":
                 messagebox.showerror(
-                    "Error", f"¡Hay un espacio al inicio en la pregunta {i + 1}")
+                    "Error",
+                    f"¡Hay un espacio al inicio en la pregunta {i + 1}")
                 contador_de_errores += 1
                 if elemento[-1] == " ":
                     messagebox.showerror(
-                        "Error", f"¡Hay un espacio al final en la pregunta {i + 1}!")
+                        "Error",
+                        f"¡Hay un espacio al final en la pregunta {i + 1}!")
                     contador_de_errores += 1
             elif elemento[-1] == " ":
                 messagebox.showerror(
-                    "Error", f"¡Hay un espacio al final en la pregunta {i + 1}!")
+                    "Error",
+                    f"¡Hay un espacio al final en la pregunta {i + 1}!")
                 contador_de_errores += 1
 
         # Pasa todas las respuestas para ser procesadas a sep_days
