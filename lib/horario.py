@@ -1,3 +1,4 @@
+# Bloque de importaciones
 import tkinter as tk
 from tkinter import messagebox, ttk
 import os
@@ -5,6 +6,7 @@ import pandas as pd
 
 
 # Bloque de definiciones
+# Bloque de definición de funciones
 
 
 def tabla(ventana_principal):

@@ -1,9 +1,11 @@
+# Bloque de importaciones
 import tkinter as tk
 from tkinter.constants import BOTH, LEFT, RIGHT, VERTICAL, Y
 from tkinter import ttk
 
 
 # Bloque de definiciones
+# Bloque de definición de funciones
 
 
 def barra_de_desplazamiento(preguntas):

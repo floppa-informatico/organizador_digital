@@ -1,3 +1,4 @@
+# Bloque de importaciones
 import tkinter as tk
 from tkinter.ttk import Label
 from lib.scrollbar import barra_de_desplazamiento
@@ -6,6 +7,7 @@ from tkinter import messagebox
 
 
 # Bloque de definiciones
+# Bloque de definición de funciones
 
 
 def interface(ventana_principal):
@@ -188,7 +190,9 @@ def retornar(
     Esta función tiene como entrada la ventana del menú principal,
     también la ventana de las preguntas, siendo estos dos ultimos datos
     propios de tkinter, también la respuesta al widget "Entry" llamada
-    "respuesta_x" siendo x el número de cualquiera de las 11 preguntas
+    "respuesta_x" siendo x el número de cualquiera de las 11 preguntas,
+    no es posible meterlos todos a una lista, debido que al obtener la
+    respuesta da error.
     Esta funcion también se encarga se obtener todas las respuestas y
     poder pasarlo de un tipo de dato propio de tkinter a un string,
     además de un primer filtro si es que los datos corresponde a la

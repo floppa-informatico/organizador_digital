@@ -1,8 +1,10 @@
+# Bloque de importaciones
 from tkinter import messagebox
 import os
 
 
 # Bloque de definiciones
+# Bloque de definición de funciones
 
 
 def escribir_archivo(study_days, day, days, sientes):
@@ -15,6 +17,8 @@ def escribir_archivo(study_days, day, days, sientes):
     Esta función tiene como salida datos.txt siendo este de tipo
     archivo.
     """
+    # Se escribe en datos.txt.
+    # Salida
     with open("./data/datos.txt", "w") as archivo:
         archivo.write(str(study_days))
         archivo.write("\n")
@@ -25,7 +29,7 @@ def escribir_archivo(study_days, day, days, sientes):
         archivo.write(str(sientes))
 
 
-def borrar_archivo(nombre_archivo):
+def borrar_archivo():
     """
     Esta función borra lo que estaba escrito en datos.txt. Con el fin
     de evitar cualquier error que se pueda producir durante el programa
@@ -33,13 +37,21 @@ def borrar_archivo(nombre_archivo):
     tiene como salida datos.txt siendo de tipo archivo y un mensaje
     informativo siendo este un tipo de dato propio de tkinter
     """
-    if os.path.exists("./data/datos.txt"):
-        os.remove("./data/datos.txt")
-    if os.path.exists("./data/datos.xlsx"):
-        os.remove("./data/datos.xlsx")
-    if os.path.exists("./data/eventos.txt"):
-        os.remove("./data/eventos.txt")
-    if nombre_archivo == "principal":
+    # Pregunta al usuario si esta seguro si quiere eliminar todo su
+    # información
+    respuesta_vacio = messagebox.askquestion(
+        "Advertencia",
+        "Se borrará toda la información"
+        " ¿Esta segur@?")
+    if respuesta_vacio == "yes":
+        # Verifica si los archivos existen, y si es así los elimina
+        if os.path.exists("./data/datos.txt"):
+            os.remove("./data/datos.txt")
+        if os.path.exists("./data/datos.xlsx"):
+            os.remove("./data/datos.xlsx")
+        if os.path.exists("./data/eventos.txt"):
+            os.remove("./data/eventos.txt")
+        # Informa al usuario que se ha eliminado la información.
         messagebox.showinfo("Se ha completado",
                             "¡Se ha borrado la información éxito!")
 

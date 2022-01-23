@@ -1,6 +1,9 @@
+# Bloque de importaciones
 import tkinter as tk
 
-# Bloque por definiciones
+
+# Bloque de definiciones
+# Bloque de definición de funciones
 
 
 def ayuda(ventana_principal):

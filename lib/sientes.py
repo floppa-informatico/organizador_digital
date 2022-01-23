@@ -1,3 +1,4 @@
+# Bloque de importaciones
 import tkinter as tk
 from tkinter import messagebox
 import os
@@ -5,6 +6,7 @@ from data.xlsx import escribir_xlsx
 
 
 # Bloque de definiciones
+# Bloque de definición de funciones
 
 
 def Sientes(ventana_principal):

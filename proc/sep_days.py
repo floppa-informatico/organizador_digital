@@ -1,3 +1,4 @@
+# Bloque de importaciones
 from proc.verificador import Verificador
 from tkinter import messagebox
 import data.archivos as archivos
@@ -5,6 +6,7 @@ import data.xlsx as xlsx
 
 
 # Bloque de definiciones
+# Bloque de definición de funciones
 
 
 def weekly_time(answer, i):

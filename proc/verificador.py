@@ -1,4 +1,5 @@
 # Bloque de definiciones
+# Bloque de definición de funciones
 
 
 def Verificador(answer):

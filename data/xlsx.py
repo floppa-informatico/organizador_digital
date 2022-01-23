@@ -1,9 +1,10 @@
+# Bloque de importaciones
 import xlsxwriter
 import proc.orden_horario as horario
 #import orden_horario as horario
 
-
 # Bloque de definiciones
+# Bloque de definición de funciones
 
 
 def imprimir_datos_en_xlsx(
@@ -12,9 +13,7 @@ def imprimir_datos_en_xlsx(
         horas_horario,
         estado_animico,
         hoja,
-        semana_horario,
-        semana_solo_horario,
-        dias_con_hora,
+        lista_hora_clases,
         lista_horas_estudio,
         lista_horas_ocio,
         lista_horas_familia):
@@ -23,21 +22,12 @@ def imprimir_datos_en_xlsx(
     Esta función tiene como entrada dia siendo de tipo int,
     indice_dias_estudio siendo de tipo list, horas_horario siendo de
     tipo list, estado_animico siendo de tipo string, hoja siendo de
-    tipo archivo, semana_horario siendo de tipo list.
+    tipo archivo, semana_solo_horario siendo de tipo list,
+    lista_horas_estudio siendo de tipo list, lista_horas_ocio siendo de
+    tipo list, y lista_horas_familia siendo de tipo list.
     Tiene como salida la escritura en el archivo .xlsx, siendo este
     de tipo archivo.
     """
-    # Hacemos una lista de lista de lista para obtener la cantidad de
-    # bloques de horario de clases
-    semana_solo_horario = eval(semana_solo_horario)
-    lista_temporal = []
-    lista_temporal_1 = []
-    for hora in semana_solo_horario[dia]:
-        lista_temporal.append(hora)
-        if len(lista_temporal) == 2:
-            lista_temporal_1.append(lista_temporal)
-            lista_temporal = []
-    semana_solo_horario = lista_temporal_1
     # Verifica si el dia estando representado por la variable dia es
     # un dia el que el usuario estudia, estando previamente
     # identificado en indice_dias_estudio
@@ -48,6 +38,7 @@ def imprimir_datos_en_xlsx(
         # mismo los días de estudio.
         if estudio == dia:
             dia_de_estudio = True
+
     if dia_de_estudio:
         # Verifica el estado_animico del usuario, ya que si se
         # encuentra en mal estado divide los tiempos de estudio
@@ -63,7 +54,7 @@ def imprimir_datos_en_xlsx(
             # el usario tendrá tiempo de ocio.
             if dia == 4 or dia == 5 or dia == 6:
                 # Escribe los tiempos destinados a clases.
-                for hora_clases in semana_solo_horario:
+                for hora_clases in lista_hora_clases[dia]:
                     hoja.write(
                         horas_horario.index(hora_clases) + 1,
                         dia + 1,
@@ -84,19 +75,19 @@ def imprimir_datos_en_xlsx(
                             "Estudio")
                     elif lista_horas_estudio[dia].index(hora_estudio) % 2 == 0:
                         hoja.write(
-                            horas_horario.index(hora_estudio),
+                            horas_horario.index(hora_estudio) + 1,
                             dia + 1,
                             "Estudio")
                     else:
                         hoja.write(
-                            horas_horario.index(hora_estudio),
+                            horas_horario.index(hora_estudio) + 1,
                             dia + 1,
                             "Descanso")
             # Si no es viernes, sabado o domingo, escribe los tiempos
             # sin considerar el tiempo dedicado a ocio.
             else:
                 # Escribe los tiempos destinados a clases
-                for hora_clases in semana_solo_horario:
+                for hora_clases in lista_hora_clases[dia]:
                     hoja.write(
                         horas_horario.index(hora_clases) + 1,
                         dia + 1,
@@ -111,12 +102,12 @@ def imprimir_datos_en_xlsx(
                             "Estudio")
                     elif lista_horas_estudio[dia].index(hora_estudio) % 2 == 0:
                         hoja.write(
-                            horas_horario.index(hora_estudio),
+                            horas_horario.index(hora_estudio) + 1,
                             dia + 1,
                             "Estudio")
                     else:
                         hoja.write(
-                            horas_horario.index(hora_estudio),
+                            horas_horario.index(hora_estudio) + 1,
                             dia + 1,
                             "Descanso")
         # Si el usuario se encuentra bien con respecto a su salud
@@ -132,7 +123,7 @@ def imprimir_datos_en_xlsx(
             # el usario tendrá tiempo de ocio.
             if dia == 4 or dia == 5 or dia == 6:
                 # Escribe los tiempos destinados a clases.
-                for hora_clases in semana_solo_horario:
+                for hora_clases in lista_hora_clases[dia]:
                     hoja.write(
                         horas_horario.index(hora_clases) + 1,
                         dia + 1,
@@ -153,12 +144,12 @@ def imprimir_datos_en_xlsx(
                             "Estudio")
                     elif lista_horas_estudio[dia].index(hora_estudio) % 2 == 0:
                         hoja.write(
-                            horas_horario.index(hora_estudio),
+                            horas_horario.index(hora_estudio) + 1,
                             dia + 1,
                             "Estudio")
                     else:
                         hoja.write(
-                            horas_horario.index(hora_estudio),
+                            horas_horario.index(hora_estudio) + 1,
                             dia + 1,
                             "Descanso")
             # Si el día que se escribirá no es viernes, sabado o
@@ -166,7 +157,7 @@ def imprimir_datos_en_xlsx(
             # tiempo destinado al ocio
             else:
                 # Se escribe el tiempo destinado a las clases
-                for hora_clases in semana_solo_horario:
+                for hora_clases in lista_hora_clases[dia]:
                     hoja.write(
                         horas_horario.index(hora_clases) + 1,
                         dia + 1,
@@ -181,12 +172,12 @@ def imprimir_datos_en_xlsx(
                             "Estudio")
                     elif lista_horas_estudio[dia].index(hora_estudio) % 2 == 0:
                         hoja.write(
-                            horas_horario.index(hora_estudio),
+                            horas_horario.index(hora_estudio) + 1,
                             dia + 1,
                             "Estudio")
                     else:
                         hoja.write(
-                            horas_horario.index(hora_estudio),
+                            horas_horario.index(hora_estudio) + 1,
                             dia + 1,
                             "Descanso")
     # Escriben el tiempo sin considerar los tiempos destinados al
@@ -202,7 +193,7 @@ def imprimir_datos_en_xlsx(
         # el tiempo destinado al ocio
         if dia == 4 or dia == 5 or dia == 6:
             # Se escribe el tiempo destinado a clases.
-            for hora_clases in semana_solo_horario:
+            for hora_clases in lista_hora_clases[dia]:
                 hoja.write(
                     horas_horario.index(hora_clases) + 1,
                     dia + 1,
@@ -218,7 +209,7 @@ def imprimir_datos_en_xlsx(
         # considerar el tiempo de ocio.
         else:
             # Se escriben los horarios de clase.
-            for hora_clases in semana_solo_horario:
+            for hora_clases in lista_hora_clases[dia]:
                 hoja.write(
                     horas_horario.index(hora_clases) + 1,
                     dia + 1,
@@ -236,10 +227,17 @@ def escribir_xlsx():
     # Se leen y se trabajan los datos en la función orden del archivo
     # orden_horario.py ubicado dentro del directorio proc.
     # Se obtienen los datos ya trabajados.
-    horas_horario, semana_horario, horas_con_formato,\
-        indice_dias_estudio, semana_solo_horario, \
-        dias_con_hora, lista_horas_estudio, \
-        lista_horas_ocio, lista_horas_familia = horario.orden()
+
+    todas_las_listas = horario.orden()
+    horas_horario = todas_las_listas[0]
+    semana_horario = todas_las_listas[1]
+    horas_con_formato = todas_las_listas[2]
+    indice_dias_estudio = todas_las_listas[3]
+    lista_hora_clases = todas_las_listas[4]
+    lista_horas_estudio = todas_las_listas[5]
+    lista_horas_ocio = todas_las_listas[6]
+    lista_horas_familia = todas_las_listas[7]
+
     # Se obtiene el estado animico, ya que este no sufre modificaciones
     # en orden_horario.py
     with open("./data/datos.txt", "r") as txt:
@@ -279,9 +277,7 @@ def escribir_xlsx():
                     horas_horario,
                     estado_animico,
                     hoja,
-                    semana_horario,
-                    semana_solo_horario,
-                    dias_con_hora,
+                    lista_hora_clases,
                     lista_horas_estudio,
                     lista_horas_ocio,
                     lista_horas_familia)
@@ -293,9 +289,7 @@ def escribir_xlsx():
                     horas_horario,
                     estado_animico,
                     hoja,
-                    semana_horario,
-                    semana_solo_horario,
-                    dias_con_hora,
+                    lista_hora_clases,
                     lista_horas_estudio,
                     lista_horas_ocio,
                     lista_horas_familia)
@@ -307,9 +301,7 @@ def escribir_xlsx():
                     horas_horario,
                     estado_animico,
                     hoja,
-                    semana_horario,
-                    semana_solo_horario,
-                    dias_con_hora,
+                    lista_hora_clases,
                     lista_horas_estudio,
                     lista_horas_ocio,
                     lista_horas_familia)
@@ -321,9 +313,7 @@ def escribir_xlsx():
                     horas_horario,
                     estado_animico,
                     hoja,
-                    semana_horario,
-                    semana_solo_horario,
-                    dias_con_hora,
+                    lista_hora_clases,
                     lista_horas_estudio,
                     lista_horas_ocio,
                     lista_horas_familia)
@@ -335,9 +325,7 @@ def escribir_xlsx():
                     horas_horario,
                     estado_animico,
                     hoja,
-                    semana_horario,
-                    semana_solo_horario,
-                    dias_con_hora,
+                    lista_hora_clases,
                     lista_horas_estudio,
                     lista_horas_ocio,
                     lista_horas_familia)
@@ -349,13 +337,10 @@ def escribir_xlsx():
                     horas_horario,
                     estado_animico,
                     hoja,
-                    semana_horario,
-                    semana_solo_horario,
-                    dias_con_hora,
+                    lista_hora_clases,
                     lista_horas_estudio,
                     lista_horas_ocio,
                     lista_horas_familia)
-
     # Se imprimen las horas para que el usuario tenga una mejor
     # comprensión del horario.
     for horas in range(len(horas_con_formato)):
@@ -367,8 +352,4 @@ def escribir_xlsx():
     archivo.close()
 
 
-# Bloque principal
-# Se ejecuta solamente si se ejecuta solamente este archivo .py no así
-# si este archivo es llamado desde otro archivo.
-if __name__ == "__main__":
-    escribir_xlsx()
+escribir_xlsx()
