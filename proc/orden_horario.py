@@ -581,7 +581,3 @@ def orden():
     todas_las_salidas.append(lista_horas_familia)
 
     return todas_las_salidas
-
-
-if __name__ == "__main__":
-    orden()
