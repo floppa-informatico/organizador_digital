@@ -1,6 +1,5 @@
 # organizador_digital
 Proyecto en desarrollo del ramo de Fundamentos de Programación de Ingeniería Laboratorio.
-Desarrollado por el grupo 1.
 
 La pandemia por el Covid-19 y el confinamiento por las normas sanitarias, han tenido un 
 gran impacto en la salud mental. En este contexto, se puede distinguir que los jóvenes 
