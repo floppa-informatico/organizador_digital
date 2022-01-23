@@ -19,14 +19,13 @@ de los que disponga, como a su vez, sus horarios de sueño, comida, compromisos,
 etc. Con el objetivo de que se pueda saber en qué momentos se les puede asignar una 
 actividad, obteniendo una mejor organización de su tiempo.
 
-Manual de instalación: Para el presente programa se utilizaron varios
-módulos externos para asegurar un correcto funcionamiento del mismo y
-obtener una solución al problema planteado.
-Como requisito previo debe tener instalado python en su dispositivo
-terminal.
-Para comenzar pulse la tecla windows, seguido de esto escriba cmd y
-pulse en la opción donde dice Símbolo del Sistema (asumiendo que tiene
-el idioma español configurado en su sistema operativo).
+Manual de instalación: Para el presente programa se utilizaron varios módulos externos 
+para asegurar un correcto funcionamiento del mismo y obtener una solución al problema
+planteado.
+Como requisito previo debe tener instalado python en su dispositivo terminal.
+Para comenzar pulse la tecla windows, seguido de esto escriba cmd y pulse en la opción
+donde dice Símbolo del Sistema (asumiendo que tiene el idioma español configurado en
+su sistema operativo).
 Luego de esto escriba los siguientes comandos (en orden):
 pip install tkinter
 pip install tkcalendar
@@ -35,8 +34,7 @@ pip install openpyxl
 pip install numpy
 pip install xlrd
 pip install xlsxwriter
-Una vez realizado esto ya puede cerrar la ventana del Símbolo del
-Sistema. Se recomienda después de haber realizado esto reiniciar el
-equipo para un correcto funcionamiento del programa.
-Además, cabe destacar que solo el presente archivo main.py es
-ejecutable.
+Una vez realizado esto ya puede cerrar la ventana del Símbolo del Sistema. Se recomienda
+después de haber realizado esto reiniciar el equipo para un correcto funcionamiento del
+programa.
+Además, cabe destacar que solo el presente archivo main.py es ejecutable.
