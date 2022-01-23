@@ -24,7 +24,6 @@ def Calendario(ventana_principal):
             "Error", "¡Primero debes completar las preguntas!")
     else:
         # Crear subventana
-        global calendari0
         calendari0 = tk.Toplevel(ventana_principal)
         # Crear titulo
         calendari0.title("organizador_digital")
@@ -56,23 +55,22 @@ def Calendario(ventana_principal):
 
         # Entrada para poder introducir eventos al calendario
         respuesta = tk.Entry(calendari0)
-        global respuesta_1
         respuesta_1 = respuesta
         # Se pone en pantalla la entrada
         respuesta.grid(row=3, column=5)
 
         # Crear calendario
         mindate = datetime.date(year=year, month=mes, day=dia)
-        global cal
         cal = calendar.Calendar(marco, selectmode="day", mindate=mindate, year=year,
                                 mouth=mes, day=dia)
         cal.pack(fill="both", expand=True)
 
-        # Se envia respuesta al pulsar enter
-        respuesta.bind("<Return>", guarda_datos_calendario)
-
         # Se ponen los eventos guardados del calendario
-        escribir_eventos(cal)
+        lista_iterador = escribir_eventos(cal, calendari0)
+
+        # Se envia respuesta al pulsar enter
+        respuesta.bind("<Return>", lambda event, calendari0=calendari0: guarda_datos_calendario(
+            event, calendari0, cal, respuesta_1, lista_iterador))
 
         # Boton para volver
         boton_volver = tk.Button(
@@ -101,23 +99,87 @@ def retornar(ventana_principal, calendar):
     calendar.destroy()
 
 
-def guarda_datos_calendario(event):
+def guarda_datos_calendario(event, calendari0, cal, respuesta_1, lista_iterador):
     """"""
     # Se obtiene la fecha que marcó en el calendario
     respuesta = respuesta_1.get()
     fecha = cal.selection_get()
+    # Se forma el string que se escribirá en el archivo
+    linea = respuesta + "," + str(fecha) + "\n"
     # Se guarda la respuesta con su respectiva fecha marcada
     # en el calendario en eventos .txt
     with open("./data/eventos.txt", "a") as archivo:
-        archivo.write(respuesta)
-        archivo.write(",")
-        archivo.write(str(fecha))
-        archivo.write("\n")
+        archivo.write(linea)
     # Escribe el evento en el calendario
-    escribir_eventos(cal)
+    escribir_nuevo_evento(cal, calendari0, respuesta, lista_iterador, linea)
 
 
-def escribir_eventos(cal):
+def escribir_nuevo_evento(cal, calendari0, respuesta, lista_iterador, linea):
+    """"""
+    # Se agrega un nuevo indice a lista_iterador
+    if len(lista_iterador) != 0:
+        indice = lista_iterador[-1] + 1
+        lista_iterador.append(indice)
+    # Se obtiene el nombre del evento
+    evento_nombre = f"evento_{indice}"
+    # Se separa en una lista
+    linea_0 = linea.split(",")
+    # Se separa el tiempo para poder ubicar el
+    # calendario en la fecha pedida
+    tiempo = linea_0[-1].split("-")
+    # Se obtiene la fecha
+    fecha = datetime.date(year=int(tiempo[0]), month=int(
+        tiempo[1]), day=int(tiempo[2]))
+    # Se marca el evento en el calendario
+    cal.calevent_create(fecha, linea_0[0], evento_nombre)
+    # Se marca con color rojo el dia pedido
+    cal.tag_config(f"evento_{indice}", background="red", foreground="yellow")
+    # Dia actual
+    today = date.today()
+    # Se obtiene texto para etiqueta
+    display = display_etiqueta(fecha,today,respuesta)
+    # Se crea boton y etiqueta
+    dias = tk.Label(calendari0, text=display)
+    dias.grid(row=3+indice, column=0)
+    eliminar = tk.Button(calendari0, text="x", command=lambda: eliminar_evento_reciente(
+        dias, eliminar, evento_nombre, cal, linea))
+    eliminar.grid(row=3+indice, column=1)
+
+
+def eliminar_evento_reciente(dias, eliminar, evento_nombre, cal, linea):
+    """"""
+    # Se obtienen las demas lineas
+    with open("./data/eventos.txt", "r") as archivo:
+        lineas = archivo.readlines()
+    # Se elimina la etiqueta
+    dias.destroy()
+    # Se elimina el boton para eliminar
+    eliminar.destroy()
+    # Se marca con color rojo el dia pedido
+    cal.tag_config(evento_nombre, background="white", foreground="black")
+    # Se elimina evento del calendario
+    cal.calevent_remove(evento_nombre)
+    # Se abre el archivo en modo escritura
+    with open("./data/eventos.txt", "w") as archivo:
+        # Se remueve el evento
+        lineas.remove(linea)
+        # Se vuelven a escribir los demas eventos que no han sido eliminados
+        for linea_0 in lineas:
+            archivo.write(linea_0)
+
+
+
+def display_etiqueta(d1,d2,evento):
+    # Se obtiene la diferencia de las dos fechas para indicar cuanto
+    # falta para la fecha indicada en el evento
+    tb = str(d1-d2)
+    nod = tb.split(" ")
+    # Se hace la estructura para la etiqueta
+    display = "Faltan %s dias para %s" % (nod[0], evento)
+    return display
+
+
+def escribir_eventos(cal, calendari0):
     """"""
     # Se comprueba de que si existe eventos .txt
     if os.path.exists("./data/eventos.txt"):
@@ -128,6 +190,7 @@ def escribir_eventos(cal):
         # Lee eventos .txt
         archivo = open("./data/eventos.txt", "r")
         iterador = 0
+        lista_iterador = []
         # Elimina el evento si existe, para evitar que se duplique
         cal.calevent_remove()
         # Se comienza a leer linea por linea
@@ -151,15 +214,18 @@ def escribir_eventos(cal):
             # Se pone en pantalla cuantas horas faltan para
             # x dia puesto como evento
             dias_faltantes(linea_0[0], fecha, today,
-                           iterador, evento_nombre, lineas, linea, archivo)
+                           iterador, evento_nombre, lineas, linea, archivo, calendari0, cal)
             # Se marca con color rojo el dia pedido
             cal.tag_config(f"evento_{iterador}",
                            background="red", foreground="yellow")
+            # Agregar iterador a lista_iterador
+            lista_iterador.append(iterador)
             iterador += 1
         archivo.close()
+        return lista_iterador
 
 
-def dias_faltantes(evento, d1, d2, iterador, evento_nombre, lineas, linea, archivo):
+def dias_faltantes(evento, d1, d2, iterador, evento_nombre, lineas, linea, archivo, calendari0, cal):
     """
 
     """
@@ -173,11 +239,11 @@ def dias_faltantes(evento, d1, d2, iterador, evento_nombre, lineas, linea, archi
     dias = tk.Label(calendari0, text=display)
     dias.grid(row=3+iterador, column=0)
     eliminar = tk.Button(calendari0, text="x", command=lambda: eliminar_evento(
-        dias, eliminar, evento_nombre, lineas, linea, archivo))
+        dias, eliminar, evento_nombre, lineas, linea, archivo, cal))
     eliminar.grid(row=3+iterador, column=1)
 
 
-def eliminar_evento(dias, eliminar, evento_nombre, lineas, linea, archivo):
+def eliminar_evento(dias, eliminar, evento_nombre, lineas, linea, archivo, cal):
     # Se elimina la etiqueta
     dias.destroy()
     # Se elimina el boton para eliminar
