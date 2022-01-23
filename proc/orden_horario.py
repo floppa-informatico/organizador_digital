@@ -1,4 +1,130 @@
-# Bloque por definición
+# Bloque de definiciones
+
+
+def duplicar(lista):
+    """
+    Esta función tiene el propósito de duplicar la lista, ordenarla,
+    y borrar las horas del inicio y del final con el objetivo de poder
+    darle formato en la función formato_listas.
+    Esta función tiene como entrada lista siendo este de tipo list y
+    tiene como salida lista siendo este de tipo list.
+    """
+    # Ahora duplicamos las horas a excepción de las horas de los
+    # extremos para que quede de la siguiente forma x:xx - x:xx
+    lista *= 2
+    # Se ordena la lista
+    lista.sort()
+    # Se elimina el primer y el último elemento
+    lista.pop(0)
+    lista.pop(-1)
+    return lista
+
+
+def formato_listas_de_listas(lista):
+    """ xd """
+    # Se crean listas temporales
+    lista_temporal = []
+    lista_temporal_1 = []
+    lista_temporal_2 = []
+    # Luego se da formato a la lista
+    for dia in lista:
+        for hora in dia:
+            # Se agrega la hora a la lista temporal
+            lista_temporal.append(hora)
+            # Si el largo de la lista temporal es igual a dos significa
+            # que ya tiene el formato esperado
+            if len(lista_temporal) == 2:
+                # Se agrega la lista temporal a la lista temporal_1
+                # representando el día en especifico.
+                lista_temporal_1.append(lista_temporal)
+                # Se vacía la lista temporal para seguir con el formato
+                lista_temporal = []
+        # Si el largo de la lista temporal es igual al largo de la
+        # lista correspondiente al día, agrega la lista_temporal_1
+        # a lista_temporal_2
+        if len(lista_temporal_1) == len(dia) / 2:
+            lista_temporal_2.append(lista_temporal_1)
+            lista_temporal_1 = []
+    # Al tener la lista_temporal_2 la lista ya con el formato
+    # solicitado se le asigna esta lista la lista original.
+    lista = lista_temporal_2
+    return lista
+
+
+def eliminar_repetidos_lista_de_listas(lista):
+    """ xd """
+    # Se recorre la lista eliminando elementos repetidos
+    for dia in lista:
+        for hora in dia:
+            # Si la hora se encuentra mas de una vez en la lista
+            # será eliminado
+            while dia.count(hora) > 1:
+                # Se elimina la hora de la lista
+                dia.remove(hora)
+        # Se ordena la lista de los dias
+        dia.sort()
+    # Una vez eliminado los días repetidos, se duplica la lista
+    # y se elimina la repeticiones de los extremos
+    for dia in range(len(lista)):
+        # Se duplica la lista
+        lista[dia] *= 2
+        # Se ordena la lista
+        lista[dia].sort()
+        if len(lista[dia]) != 0:
+            # Elimina el primer elemento
+            lista[dia].pop(0)
+            # Elimina el último elemento
+            lista[dia].pop(-1)
+    return lista
+
+
+def eliminar_repetidos_listas(lista):
+    """
+    Esta función tiene como 
+
+    """
+    # Se verifica que no hayan horas repetidas
+    for elemento in lista:
+        # Si se encuentra mas de una vez en la lista es por
+        # que esta repetido
+        while lista.count(elemento) > 1:
+            lista.remove(elemento)
+    return lista
+
+
+def formato_listas(lista):
+    """
+    Esta función está encargada de dar un formato [xx,xx] de manera que
+    se pueda trabajar con estas horas en el archivo escribir_xlsx.py
+    Esta función tiene como entrada lista siendo este de tipo list.
+    Y tiene como salida lista siendo de tipo list.
+    """
+    # Se crean listas temporales
+    lista_temporal = []
+    lista_temporal_2 = []
+    # Se recorre la lista
+    for hora in lista:
+        lista_temporal.append(hora)
+        # Se forman bloques de dos horas
+        if len(lista_temporal) == 2:
+            # Se hace una lista de listas
+            lista_temporal_2.append(lista_temporal)
+            # Se vacia la lista_temporal para seguir formando bloques
+            lista_temporal = []
+    # Una vez dado el formato deseado almacenado en lista_temporal_2 se
+    # asigna este a la lista
+    lista = lista_temporal_2
+    return lista
+
+
+def eliminar_bloques_inexistentes(lista, semana):
+    """"""
+    # Elimina de la lista horas sobrantes, que no están en semana
+    for dia in lista:
+        for horas in dia:
+            if horas not in semana:
+                dia.remove(horas)
+    return lista
 
 
 def orden():
@@ -20,8 +146,9 @@ def orden():
     dias_con_horas = eval(respuestas[1])
     semana_horario = eval(respuestas[-2])
     estado_animico = respuestas[-1]
-    #archivo = open("./data/datos.txt", "w")
-    # archivo.write(str(dias_especificos))
+    archivo = open("./data/datos.txt", "w")
+    archivo.write(str(dias_especificos))
+    archivo.write("\n")
     semana_para_escribir = semana_horario
 
     # A partir desde las 8:00 genera las demás horas hasta
@@ -50,13 +177,12 @@ def orden():
         # dias
         semana_horario_temp.append(dia_0)
     semana_horario = semana_horario_temp
-
-    # Se ubica las horas de estudio según el día que se especifica.
+    semana_solo_horario = semana_horario
+    semana_solo_horario = str(semana_solo_horario)
+    semana_solo_horario_2 = semana_solo_horario
 
     # Se elimina si hay días repetidos.
-    for elemento in dias_especificos:
-        while dias_especificos.count(elemento) > 1:
-            dias_especificos.pop(dias_especificos.index(elemento))
+    dias_especificos = eliminar_repetidos_listas(dias_especificos)
 
     # Se transforma las horas a minutos
     if not(str(dias_con_horas[-1]).isdigit()):
@@ -92,7 +218,7 @@ def orden():
 
     # Se le agregan las horas de ocio a las horas de la semana
     comprobar = horas_horario
-    for ocio in range(4, 7):
+    for ocio in range(4, 6):
         if ocio == 4 or ocio == 5:
             elemento_anterior = int(semana_horario[ocio][-1])
             # Se suma la hora anterior con el correspondiente
@@ -103,8 +229,26 @@ def orden():
             comprobar.append(hora_ocio)
             comprobar.append(elemento_anterior)
             comprobar.sort()
-            for ocio_i in comprobar[comprobar.index(elemento_anterior):comprobar.index(hora_ocio)]:
+            for ocio_i in comprobar[comprobar.index(elemento_anterior) - 1:comprobar.index(hora_ocio) + 1]:
                 semana_horario[ocio].append(ocio_i)
+    # Se obtienen las horas de ocio por separado para usarlo en
+    # escribir_xlsx.py
+    lista_horas_ocio = []
+    lista_temporal = []
+    for dia in range(len(semana_horario)):
+        for hora in semana_horario[dia]:
+            # Si la hora no se encuentra dentro de semana_solo_horario
+            # es por que es la hora de estudio.
+            if hora not in eval(semana_solo_horario_2)[dia]:
+                lista_temporal.append(hora)
+        # Se agrega la hora anterior para poder los bloques de horario
+        # de ocio.
+        if dia == 4 or dia == 5:
+            lista_temporal.append(eval(semana_solo_horario_2)[dia][-1])
+        # Se hace una lista de listas para poder organizar los tiempos
+        # por día
+        lista_horas_ocio.append(lista_temporal)
+        lista_temporal = []
 
     # Se agregan las horas de estudio a los días de la semana
     lista_estudio = []
@@ -142,47 +286,48 @@ def orden():
                         comprobar.append(hora)
                         comprobar.append(elemento_anterior)
                         comprobar.sort()
-                        for estudio in comprobar[comprobar.index(elemento_anterior):comprobar.index(hora_0)]:
+                        for estudio in comprobar[comprobar.index(elemento_anterior) - 1:comprobar.index(hora) + 1]:
                             semana_horario[dias_estudio].append(estudio)
             # Si se ha dividido antes el tiempo
             else:
                 # Recorre la lista para poder dividir nuevamente el
                 # tiempo
-                for estudio in range(len(dias_con_horas[0])):
-                    if estudio % 2 == 0:
-                        if dias_con_horas[0][estudio] >= 40:
-                            # Divide el tiempo de estudios en dos.
-                            nuevo_tiempo_0 = dias_con_horas[0][estudio] / 2
-                            nuevo_tiempo_1 = round(nuevo_tiempo_0)
+                if dias_con_horas[0][0] >= 40:
+                    for estudio in range(len(dias_con_horas[0])):
+                        if estudio % 2 == 0:
+                            if dias_con_horas[0][estudio] >= 40:
+                                # Divide el tiempo de estudios en dos.
+                                nuevo_tiempo_0 = dias_con_horas[0][estudio] / 2
+                                nuevo_tiempo_1 = round(nuevo_tiempo_0)
 
-                            # Hace una proporcion de 1:5 usada en técnica pomodoro
-                            # Al ser dos tiempos iguales, solo se ocupará uno para
-                            # determinar los tiempos de descanso.
-                            tiempo_de_descanso = round(
-                                (nuevo_tiempo_1 * 1) / 5)
-                            # Se agrega este nuevo tiempo de estudio a lista_estudio
-                            lista_estudio.append(int(nuevo_tiempo_0))
-                            lista_estudio.append(int(tiempo_de_descanso))
-                            lista_estudio.append(int(nuevo_tiempo_1))
-                    elif estudio % 2 != 0:
-                        lista_estudio.append(dias_con_horas[0][estudio])
-                # Se agrega esta lista al elemento [0] de dias_con_horas
-                dias_con_horas[0] = lista_estudio
-                # Se agrega este nuevo tiempo de estudio a lista_estudio
-                for hora_estudio in lista_estudio:
-                    elemento_anterior = int(semana_horario[dias_estudio][-1])
-                    # Se agregan estos dos anteriores a la lista semana_horario
-                    hora = int(
-                        semana_horario[dias_estudio][-1]) + int(hora_estudio)
-                    semana_horario[dias_estudio].append(hora)
-                    # Se agregan las horas que están entre estas
-                    comprobar.append(hora)
-                    comprobar.append(elemento_anterior)
-                    comprobar.sort()
-                    # Se recorre la lista comprobar para agregar todos los tiempos
-                    # que esta entre los tiempos de estudio a la lista
-                    for estudio in comprobar[comprobar.index(elemento_anterior):comprobar.index(hora_0)]:
-                        semana_horario[dias_estudio].append(estudio)
+                                # Hace una proporcion de 1:5 usada en técnica pomodoro
+                                # Al ser dos tiempos iguales, solo se ocupará uno para
+                                # determinar los tiempos de descanso.
+                                tiempo_de_descanso = round(
+                                    (nuevo_tiempo_1 * 1) / 5)
+                                # Se agrega este nuevo tiempo de estudio a lista_estudio
+                                lista_estudio.append(int(nuevo_tiempo_0))
+                                lista_estudio.append(int(tiempo_de_descanso))
+                                lista_estudio.append(int(nuevo_tiempo_1))
+                        elif estudio % 2 != 0:
+                            lista_estudio.append(dias_con_horas[0][estudio])
+                    # Se agrega esta lista al elemento [0] de dias_con_horas
+                    dias_con_horas[0] = lista_estudio
+                    # Se agrega este nuevo tiempo de estudio a lista_estudio
+                    for hora_estudio in lista_estudio:
+                        elemento_anterior = int(semana_horario[dias_estudio][-1])
+                        # Se agregan estos dos anteriores a la lista semana_horario
+                        hora = int(
+                            semana_horario[dias_estudio][-1]) + int(hora_estudio)
+                        semana_horario[dias_estudio].append(hora)
+                        # Se agregan las horas que están entre estas
+                        comprobar.append(hora)
+                        comprobar.append(elemento_anterior)
+                        comprobar.sort()
+                        # Se recorre la lista comprobar para agregar todos los tiempos
+                        # que esta entre los tiempos de estudio a la lista
+                        for estudio in comprobar[comprobar.index(elemento_anterior) - 1:comprobar.index(hora) + 1]:
+                            semana_horario[dias_estudio].append(estudio)
 
         else:
             if str(dias_con_horas[0]).isdigit():
@@ -196,12 +341,31 @@ def orden():
                 comprobar.sort()
                 # Se recorre la lista comprobar para agregar todos los tiempos
                 # que esta entre los tiempos de estudio a la lista
-                for estudio in comprobar[comprobar.index(elemento_anterior):comprobar.index(hora_0)]:
+                for estudio in comprobar[comprobar.index(elemento_anterior) - 1:comprobar.index(hora_0) + 1]:
                     semana_horario[dias_estudio].append(estudio)
-    #archivo = archivo.write(dias_con_horas)
-    #archivo = archivo.write(semana_para_escribir)
-    #archivo = archivo.write(estado_animico)
-    # archivo.close()
+    # Se guarda la division hecha al horario de estudios al usar el
+    # boton como te sientes.
+    archivo.write(str(dias_con_horas))
+    archivo.write("\n")
+    archivo.write(str(semana_para_escribir))
+    archivo.write("\n")
+    archivo.write(str(estado_animico))
+    archivo.close()
+    # Separamos las horas de estudio para el archivo
+    # escribir_xlsx.py
+    lista_horas_estudio = []
+    lista_temporal = []
+    for dia in range(len(semana_horario)):
+        for hora in semana_horario[dia]:
+            # Si la hora no se encuentra dentro de semana_solo_horario
+            # es por que es la hora de estudio.
+            if hora not in eval(semana_solo_horario_2)[dia] and hora not in lista_horas_ocio[dia]:
+                lista_temporal.append(hora)
+        # Se agrega la hora anterior a la lista
+        if dia in indice_dias_estudio:
+            lista_temporal.append(semana_horario[dia][-len(lista_temporal)])
+        lista_horas_estudio.append(lista_temporal)
+        lista_temporal = []
 
     # Se le agregan las horas de familia a las horas de la semana
     comprobar = horas_horario
@@ -213,34 +377,28 @@ def orden():
         for familia in comprobar[comprobar.index(hora_familia):]:
             semana_horario[agregar_dia].append(familia)
 
-    # Se busca en la lista elementos repetidos para eliminarlos
+    # Separamos las horas de familia para el archivo
+    # escribir_xlsx.py
+    lista_horas_familia = []
+    lista_temporal = []
     for dia in range(len(semana_horario)):
-        for elemento in semana_horario[dia]:
-            while semana_horario[dia].count(elemento) > 1:
-                semana_horario[dia].pop(semana_horario[dia].index(elemento))
+        for hora in semana_horario[dia]:
+            # Si la hora no se encuentra dentro de semana_solo_horario
+            # es por que es la hora de estudio.
+            if hora not in eval(semana_solo_horario_2)[dia]\
+                    and hora not in lista_horas_ocio[dia]\
+                    and hora not in lista_horas_estudio[dia]:
+                lista_temporal.append(hora)
+        lista_horas_familia.append(lista_temporal)
+        lista_temporal = []
 
-    # Se duplica la lista de cada día y se eliminan los elementos de
-    # los extremos
-    for dia in semana_horario:
-        dia *= 2
-        dia.sort()
-        dia.pop(0)
-        dia.pop(-1)
+    # Se busca en la lista elementos repetidos para eliminarlos
+    semana_horario = eliminar_repetidos_lista_de_listas(semana_horario)
 
     # Hacemos una lista de listas de listas para semana_horario
     semana_horario_2 = semana_horario
-    lista_temporal = []
-    lista_temporal_2 = []
-    lista_temporal_3 = []
-    for dia in range(len(semana_horario)):
-        for elemento in semana_horario[dia]:
-            lista_temporal.append(elemento)
-            if len(lista_temporal) == 2:
-                lista_temporal_2.append(lista_temporal)
-                lista_temporal = []
-        lista_temporal_3.append(lista_temporal_2)
-        lista_temporal_2 = []
-    semana_horario = lista_temporal_3
+    # Se ordena y se da formato a semana_horario
+    semana_horario = formato_listas_de_listas(semana_horario)
 
     # Ubica las horas ubicadas en semana_horario en horas_horario
     # Se recorre la lista semana_horario para poder agregar la lista
@@ -252,32 +410,17 @@ def orden():
     horas_horario.sort()
 
     # Se verifica que no hayan horas repetidas
-    for elemento in horas_horario:
-        while horas_horario.count(elemento) > 1:
-            horas_horario.pop(horas_horario.index(elemento))
+    horas_horario = eliminar_repetidos_listas(horas_horario)
 
-    # Ahora duplicamos las horas a excepción de las horas de los
-    # extremos para que quede de la siguiente forma x:xx - x:xx
-    horas_horario *= 2
-    horas_horario.sort()
-    horas_horario.pop(0)
-    horas_horario.pop(-1)
+    # Se duplica la lista para formar bloques
+    horas_horario = duplicar(horas_horario)
 
     # Hacemos que quede una lista de listas
-    lista_temporal = []
-    lista_temporal_2 = []
-    for hora in horas_horario:
-        lista_temporal.append(hora)
-        if len(lista_temporal) == 2:
-            lista_temporal_2.append(lista_temporal)
-            lista_temporal = []
-    horas_horario = lista_temporal_2
+    horas_horario = formato_listas(horas_horario)
 
     # Elimina de semana_horario horas sobrantes.
-    for dia in range(len(semana_horario)):
-        for horas in semana_horario[dia]:
-            if horas not in horas_horario:
-                semana_horario[dia].pop(semana_horario[dia].index(horas))
+    semana_horario = eliminar_bloques_inexistentes(
+        semana_horario, horas_horario)
 
     # Vuelve a pasar los minutos a horas
     horas_con_formato = []
@@ -292,20 +435,44 @@ def orden():
                 hora_completa = hora_entera + ":" + minutos
             horas_con_formato.append(hora_completa)
 
-    # Hacemos que quede una lista de listas
-    lista_temporal = []
-    lista_temporal_2 = []
-    for hora in horas_con_formato:
-        lista_temporal.append(hora)
-        if len(lista_temporal) == 2:
-            lista_temporal_2.append(lista_temporal)
-            lista_temporal = []
-    horas_con_formato = lista_temporal_2
+    # Hacemos que quede una lista de listas para las horas_con_formato
+    horas_con_formato = formato_listas(horas_con_formato)
+
+    # Eliminamos las horas repetidas para escribir_xlsx.py
+    # Eliminamos horas repetidas para lista_horas_ocio
+    lista_horas_ocio = eliminar_repetidos_lista_de_listas(lista_horas_ocio)
+    # Eliminamos horas repetidas para lista_horas_estudio
+    lista_horas_estudio = eliminar_repetidos_lista_de_listas(
+        lista_horas_estudio)
+    # Eliminamos horas repetidas para lista_horas_familia
+    lista_horas_familia = eliminar_repetidos_lista_de_listas(
+        lista_horas_familia)
+
+    # Damos formatos a las horas para escribir_xlsx.py
+    # Damos formato a las horas para lista_horas_ocio
+    lista_horas_ocio = formato_listas_de_listas(lista_horas_ocio)
+    # Damos formato a las horas para lista_horas_estudio
+    lista_horas_estudio = formato_listas_de_listas(lista_horas_estudio)
+    # Damos formato a las horas para lista_horas_familia
+    lista_horas_familia = formato_listas_de_listas(lista_horas_familia)
+
+    # Elimina las horas sobrantes
+    # Elimina las horas sobrantes de lista_hora_ocio
+    lista_horas_ocio = eliminar_bloques_inexistentes(
+        lista_horas_ocio, horas_horario)
+    # Elimina las horas sobrantes de lista_hora_estudio
+    lista_horas_estudio = eliminar_bloques_inexistentes(
+        lista_horas_estudio, horas_horario)
+    # Elimina las horas sobrantes de lista_horas_familia
+    lista_horas_familia = eliminar_bloques_inexistentes(
+        lista_horas_familia, horas_horario)
 
     return horas_horario, semana_horario, horas_con_formato,\
-        indice_dias_estudio
+        indice_dias_estudio, semana_solo_horario, dias_con_horas,\
+        lista_horas_estudio, lista_horas_ocio, lista_horas_familia
 
 
+# Bloque principal
 # Se ejecuta la función orden() solo si se ejecuta desde el mismo
 # no así se llama desde otro archivo
 if __name__ == "__main__":

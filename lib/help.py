@@ -1,6 +1,6 @@
 import tkinter as tk
 
-# Bloque por definición
+# Bloque por definiciones
 
 
 def ayuda(ventana_principal):

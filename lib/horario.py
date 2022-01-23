@@ -3,7 +3,8 @@ from tkinter import messagebox, ttk
 import os
 import pandas as pd
 
-# Bloque por definición
+
+# Bloque de definiciones
 
 
 def tabla(ventana_principal):

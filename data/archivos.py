@@ -2,7 +2,7 @@ from tkinter import messagebox
 import os
 
 
-# Bloque por definición
+# Bloque de definiciones
 
 
 def escribir_archivo(study_days, day, days, sientes):
@@ -37,6 +37,8 @@ def borrar_archivo(nombre_archivo):
         os.remove("./data/datos.txt")
     if os.path.exists("./data/datos.xlsx"):
         os.remove("./data/datos.xlsx")
+    if os.path.exists("./data/eventos.txt"):
+        os.remove("./data/eventos.txt")
     if nombre_archivo == "principal":
         messagebox.showinfo("Se ha completado",
                             "¡Se ha borrado la información éxito!")

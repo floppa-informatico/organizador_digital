@@ -1,4 +1,4 @@
-# Bloque por definición
+# Bloque de definiciones
 
 
 def Verificador(answer):

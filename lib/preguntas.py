@@ -1,12 +1,11 @@
 import tkinter as tk
-from tkinter.constants import END
-from tkinter.ttk import Button, Frame, Label
+from tkinter.ttk import Label
 from lib.scrollbar import barra_de_desplazamiento
 from proc.sep_days import option_1
 from tkinter import messagebox
-import data.archivos as archivos
 
-# Bloque por definición
+
+# Bloque de definiciones
 
 
 def interface(ventana_principal):

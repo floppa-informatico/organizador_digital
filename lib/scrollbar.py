@@ -2,7 +2,8 @@ import tkinter as tk
 from tkinter.constants import BOTH, LEFT, RIGHT, VERTICAL, Y
 from tkinter import ttk
 
-# Bloque por definición
+
+# Bloque de definiciones
 
 
 def barra_de_desplazamiento(preguntas):

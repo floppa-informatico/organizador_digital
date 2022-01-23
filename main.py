@@ -1,6 +1,6 @@
 """
 Autores: Sebastián González; Bastián Guerrero; Roberto Galleguillos;
-         Nicolás Chavez; Ignacio Gomez.
+         Ignacio Gomez.
 Grupo: 1
 Nombre de proyecto: organizador_digital
 Sección: 0-C-4
@@ -34,7 +34,8 @@ from lib.help import ayuda
 from lib.sientes import Sientes
 from data.archivos import borrar_archivo
 
-# Bloque de definición
+
+# Bloque de definiciones
 
 
 def principal():

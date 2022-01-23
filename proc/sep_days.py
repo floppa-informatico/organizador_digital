@@ -1,9 +1,10 @@
 from proc.verificador import Verificador
 from tkinter import messagebox
 import data.archivos as archivos
-import data.escribir_xlsx as xlsx
+import data.xlsx as xlsx
 
-# Bloque por definición
+
+# Bloque de definiciones
 
 
 def weekly_time(answer, i):

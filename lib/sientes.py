@@ -1,10 +1,10 @@
 import tkinter as tk
 from tkinter import messagebox
-import data.archivos as archivos
 import os
-import data.escribir_xlsx as escribir
+from data.xlsx import escribir_xlsx
 
-# Bloque por definición
+
+# Bloque de definiciones
 
 
 def Sientes(ventana_principal):
@@ -81,23 +81,22 @@ def retornar(ventana_principal, sentir_ventana, respuesta_0):
         with open("./data/datos.txt", "r") as archivo:
             respuestas = []
             for linea in archivo:
-                respuesta.append(linea)
+                respuestas.append(linea)
             # Dejar todas las lineas en su respectiva variable
             dias_especificos = eval(respuestas[0])
             dias_con_horas = eval(respuestas[1])
             semana_horario = eval(respuestas[-2])
             estado_animico = respuesta
         with open("./data/datos.txt", "w") as archivo:
-            archivo.write(dias_especificos)
+            archivo.write(str(dias_especificos))
             archivo.write("\n")
-            archivo.write(dias_con_horas)
+            archivo.write(str(dias_con_horas))
             archivo.write("\n")
-            archivo.write(semana_horario)
+            archivo.write(str(semana_horario))
             archivo.write("\n")
-            archivo.write(estado_animico)
+            archivo.write(str(estado_animico))
         # Se ajusta el horario
-        escribir.xlsxwriter()
-
+        escribir_xlsx()
         # Vuelve a abrir la ventana principal
         ventana_principal.deiconify()
         # Cierra la subventana

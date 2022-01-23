@@ -6,7 +6,8 @@ import datetime
 from lib.preguntas import retornar
 import os
 
-# Bloque por definición
+
+# Bloque por definiciones
 
 
 def Calendario(ventana_principal):
